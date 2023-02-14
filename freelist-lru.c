@@ -22,6 +22,17 @@
 
 #define INT_ACCESS_ONCE(var)	((int)(*((volatile int *)&(var))))
 
+// Doubly Linked List for maintaining LRU Stack
+typedef struct BufferPage {
+	// Store buffer id
+	int buf_id;
+
+	// Next and prev pointers (standard DLL)
+	BufferPage *next;
+	BufferPage *prev;
+} BufferPage;
+// Shared LRU Stack
+static BufferPage *lruStack = NULL; // Will init in shmem init
 
 /*
  * The shared freelist control information.
@@ -40,6 +51,11 @@ typedef struct
 
 	int			firstFreeBuffer;	/* Head of list of unused buffers */
 	int			lastFreeBuffer; /* Tail of list of unused buffers */
+
+	// CS3223
+	// Pointers to top and bottom of LRU stack for easy access
+	BufferPage *lruStackTop;
+	BufferPage *lruStackBottom;
 
 	/*
 	 * NOTE: lastFreeBuffer is undefined when firstFreeBuffer is -1 (that is,
