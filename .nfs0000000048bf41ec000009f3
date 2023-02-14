@@ -1,0 +1,21 @@
+2023-02-14 15:48:26.792 +08 [1818889] LOG:  starting PostgreSQL 15.0 on x86_64-pc-linux-gnu, compiled by gcc (Ubuntu 9.4.0-1ubuntu1~20.04.1) 9.4.0, 64-bit
+2023-02-14 15:48:26.792 +08 [1818889] LOG:  listening on IPv4 address "127.0.0.1", port 5024
+2023-02-14 15:48:26.805 +08 [1818889] LOG:  listening on Unix socket "/tmp/.s.PGSQL.5024"
+2023-02-14 15:48:27.246 +08 [1818895] LOG:  database system was shut down at 2023-02-07 19:03:35 +08
+2023-02-14 15:48:27.576 +08 [1818889] LOG:  database system is ready to accept connections
+2023-02-14 15:49:00.376 +08 [1818889] LOG:  received fast shutdown request
+2023-02-14 15:49:00.386 +08 [1818889] LOG:  aborting any active transactions
+2023-02-14 15:49:00.395 +08 [1818889] LOG:  background worker "logical replication launcher" (PID 1818912) exited with exit code 1
+2023-02-14 15:49:00.396 +08 [1818893] LOG:  shutting down
+2023-02-14 15:49:00.424 +08 [1818893] LOG:  checkpoint starting: shutdown immediate
+2023-02-14 15:49:00.630 +08 [1818893] LOG:  checkpoint complete: wrote 4 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.058 s, sync=0.013 s, total=0.235 s; sync files=3, longest=0.012 s, average=0.005 s; distance=0 kB, estimate=0 kB
+2023-02-14 15:49:00.736 +08 [1818889] LOG:  database system is shut down
+2023-02-14 15:53:36.771 +08 [1819411] LOG:  starting PostgreSQL 15.0 on x86_64-pc-linux-gnu, compiled by gcc (Ubuntu 9.4.0-1ubuntu1~20.04.1) 9.4.0, 64-bit
+2023-02-14 15:53:36.772 +08 [1819411] LOG:  listening on IPv4 address "127.0.0.1", port 5024
+2023-02-14 15:53:36.784 +08 [1819411] LOG:  listening on Unix socket "/tmp/.s.PGSQL.5024"
+2023-02-14 15:53:36.833 +08 [1819414] LOG:  database system was shut down at 2023-02-14 15:49:00 +08
+2023-02-14 15:53:36.903 +08 [1819411] LOG:  database system is ready to accept connections
+2023-02-14 15:53:40.808 +08 [1819430] ERROR:  relation "movies" does not exist at character 22
+2023-02-14 15:53:40.808 +08 [1819430] STATEMENT:  SELECT COUNT(*) FROM movies;
+2023-02-14 15:58:36.982 +08 [1819412] LOG:  checkpoint starting: time
+2023-02-14 15:58:37.094 +08 [1819412] LOG:  checkpoint complete: wrote 3 buffers (18.8%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.034 s, sync=0.006 s, total=0.113 s; sync files=46, longest=0.001 s, average=0.001 s; distance=637 kB, estimate=637 kB
