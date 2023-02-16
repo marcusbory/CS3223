@@ -22,6 +22,8 @@
 
 #define INT_ACCESS_ONCE(var)	((int)(*((volatile int *)&(var))))
 
+/* cs3223*/
+typedef struct StackBuffer StackBuffer;
 
 /*
  * The shared freelist control information.
