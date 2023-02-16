@@ -392,9 +392,9 @@ StrategyGetBuffer(BufferAccessStrategy strategy, uint32 *buf_state)
 			UnlockBufHdr(buf, local_buf_state);
 			return buf;
 		}
-		curr = &lruStack[buf->buf_id];
-		UnlockBufHdr(buf, local_buf_state);
-		buf = GetBufferDescriptor(curr->prev->buf_id);
+		// curr = &lruStack[buf->buf_id];
+		// UnlockBufHdr(buf, local_buf_state);
+		// buf = GetBufferDescriptor(curr->prev->buf_id);
 	}
 
 	elog(ERROR, "No unpinned buffer available.");
