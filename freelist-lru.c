@@ -433,7 +433,7 @@ StrategyGetBuffer(BufferAccessStrategy strategy, uint32 *buf_state)
 			return NULL;
 		}
 		UnlockBufHdr(buf, local_buf_state);
-		buf = GetBufferDescriptor(&lruStack[buf->buf_id]->prev);
+		buf = GetBufferDescriptor(&lruStack[buf->buf_id]->prev->buf_id);
 	}
 }
 
