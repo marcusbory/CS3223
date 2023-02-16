@@ -109,7 +109,7 @@ struct StackBuffer
 	StackBuffer* next;
 	StackBuffer* prev;
 };
-static StackBuffer *lruStack = NULL;
+static StackBuffer* lruStack = NULL;
 
 void StrategyUpdateAccessedBuffer(int buf_id, bool delete);
 
@@ -371,46 +371,64 @@ StrategyGetBuffer(BufferAccessStrategy strategy, uint32 *buf_state)
 		}
 	}
 
-	/* Nothing on the freelist, so run the "clock sweep" algorithm */
-	trycounter = NBuffers;
+	// /* Nothing on the freelist, so run the "clock sweep" algorithm */
+	// trycounter = NBuffers;
+	// for (;;)
+	// {
+	// 	buf = GetBufferDescriptor(ClockSweepTick());
+
+	// 	/*
+	// 	 * If the buffer is pinned or has a nonzero usage_count, we cannot use
+	// 	 * it; decrement the usage_count (unless pinned) and keep scanning.
+	// 	 */
+	// 	local_buf_state = LockBufHdr(buf);
+
+	// 	if (BUF_STATE_GET_REFCOUNT(local_buf_state) == 0)
+	// 	{
+	// 		if (BUF_STATE_GET_USAGECOUNT(local_buf_state) != 0)
+	// 		{
+	// 			local_buf_state -= BUF_USAGECOUNT_ONE;
+
+	// 			trycounter = NBuffers;
+	// 		}
+	// 		else
+	// 		{
+	// 			/* Found a usable buffer */
+	// 			if (strategy != NULL)
+	// 				AddBufferToRing(strategy, buf);
+	// 			*buf_state = local_buf_state;
+	// 			return buf;
+	// 		}
+	// 	}
+	// 	else if (--trycounter == 0)
+	// 	{
+	// 		/*
+	// 		 * We've scanned all the buffers without making any state changes,
+	// 		 * so all the buffers are pinned (or were when we looked at them).
+	// 		 * We could hope that someone will free one eventually, but it's
+	// 		 * probably better to fail than to risk getting stuck in an
+	// 		 * infinite loop.
+	// 		 */
+	// 		UnlockBufHdr(buf, local_buf_state);
+	// 		elog(ERROR, "no unpinned buffers available");
+	// 	}
+	// 	UnlockBufHdr(buf, local_buf_state);
+	// }
+
+	/* cs3223 */
+	/* Nothing on the freelist, so run the LRU algorithm */
 	for (;;)
 	{
-		buf = GetBufferDescriptor(ClockSweepTick());
+		buf = GetBufferDescriptor(StrategyControl->tail);
 
-		/*
-		 * If the buffer is pinned or has a nonzero usage_count, we cannot use
-		 * it; decrement the usage_count (unless pinned) and keep scanning.
-		 */
 		local_buf_state = LockBufHdr(buf);
 
 		if (BUF_STATE_GET_REFCOUNT(local_buf_state) == 0)
 		{
-			if (BUF_STATE_GET_USAGECOUNT(local_buf_state) != 0)
-			{
-				local_buf_state -= BUF_USAGECOUNT_ONE;
-
-				trycounter = NBuffers;
-			}
-			else
-			{
-				/* Found a usable buffer */
-				if (strategy != NULL)
-					AddBufferToRing(strategy, buf);
-				*buf_state = local_buf_state;
-				return buf;
-			}
-		}
-		else if (--trycounter == 0)
-		{
-			/*
-			 * We've scanned all the buffers without making any state changes,
-			 * so all the buffers are pinned (or were when we looked at them).
-			 * We could hope that someone will free one eventually, but it's
-			 * probably better to fail than to risk getting stuck in an
-			 * infinite loop.
-			 */
-			UnlockBufHdr(buf, local_buf_state);
-			elog(ERROR, "no unpinned buffers available");
+			if (strategy != NULL)
+				AddBufferToRing(strategy, buf);
+			*buf_state = local_buf_state;
+			return buf;
 		}
 		UnlockBufHdr(buf, local_buf_state);
 	}
@@ -534,6 +552,8 @@ void
 StrategyInitialize(bool init)
 {
 	bool		found;
+	/* cs3223 init lruStack */
+	bool stackFound;
 
 	/*
 	 * Initialize the shared buffer lookup hashtable.
@@ -589,17 +609,15 @@ StrategyInitialize(bool init)
 	else
 		Assert(!init);
 
-	/* cs3223 init lruStack */
-	bool stackFound;
-
 	lruStack = (StackBuffer*) ShmemInitStruct("LRU Stack", NBuffers * sizeof(StackBuffer), &stackFound);
 	if (!stackFound) {
 		Assert(init);
 		StackBuffer *sb = lruStack;
-		for (int i = 0; i < NBuffers; sb++, i++) {
+		for (int i = 0; i < NBuffers; i++) {
 			sb->prev = NULL;
 			sb->next = NULL;
 			sb->buf_id = i;
+			sb++;
 		}
 	}
 	else
