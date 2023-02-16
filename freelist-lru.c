@@ -388,7 +388,7 @@ StrategyGetBuffer(BufferAccessStrategy strategy, uint32 *buf_state)
 				AddBufferToRing(strategy, buf);
 			*buf_state = local_buf_state;
 			/* cs3223*/
-			StrategyUpdateAccessedBuffer(buf->buf_id, false);
+			// StrategyUpdateAccessedBuffer(buf->buf_id, false);
 			UnlockBufHdr(buf, local_buf_state);
 			return buf;
 		}
@@ -421,7 +421,7 @@ StrategyFreeBuffer(BufferDesc *buf)
 			StrategyControl->lastFreeBuffer = buf->buf_id;
 		StrategyControl->firstFreeBuffer = buf->buf_id;
 		/* cs3223 C4 delete from stack*/
-		StrategyUpdateAccessedBuffer(buf->buf_id, true);
+		// StrategyUpdateAccessedBuffer(buf->buf_id, true);
 	}
 
 	SpinLockRelease(&StrategyControl->buffer_strategy_lock);
