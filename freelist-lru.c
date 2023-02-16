@@ -264,6 +264,8 @@ StrategyGetBuffer(BufferAccessStrategy strategy, uint32 *buf_state)
 	int			bgwprocno;
 	int			trycounter;
 	uint32		local_buf_state;	/* to avoid repeated (de-)referencing */
+	/* cs3223 */
+	StackBuffer* curr;
 
 	/*
 	 * If given a strategy object, see whether it can select a buffer. We
@@ -432,8 +434,9 @@ StrategyGetBuffer(BufferAccessStrategy strategy, uint32 *buf_state)
 		if (StrategyControl->head->buf_id == buf->buf_id) {
 			return NULL;
 		}
+		curr = &lruStack[buf->buf_id];
 		UnlockBufHdr(buf, local_buf_state);
-		buf = GetBufferDescriptor(&lruStack[buf->buf_id]->prev->buf_id);
+		buf = GetBufferDescriptor(curr->prev->buf_id);
 	}
 }
 
