@@ -213,7 +213,11 @@ StrategyUpdateAccessedBuffer(int buf_id, bool delete)
 	if (delete) {	// C4, remove buffer from stack
 		StackBuffer* curr = &lruStack[buf_id];
 		if (StrategyControl->head->buf_id == buf_id) { 		// if is head
+<<<<<<< HEAD
 			StrategyControl->head = curr->next;		// point to next buffer
+=======
+			StrategyControl->head = current->next;		// point to next buffer
+>>>>>>> b7bc649456708e4f85d554d1e69ff103a31841cf
 			curr->next->prev = NULL;	// remove reference to curr pointer
 		} else if (StrategyControl->tail->buf_id == buf_id) { 	// if is tail
 			StrategyControl->tail = curr->prev; 	// point to prev buffer
