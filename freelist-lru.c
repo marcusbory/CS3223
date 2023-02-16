@@ -225,21 +225,24 @@ StrategyUpdateAccessedBuffer(int buf_id, bool delete)
 		curr->next = NULL;	
 		curr->prev = NULL;	// remove page from stack
 	} else {	// C1, move buffer to top of stack
-		if (StrategyControl->head->buf_id == buf_id) { 		// if is head
-			// do nothing
-		} else {
-			if (StrategyControl->tail->buf_id == buf_id) { 	// if is tail
+		if (StrategyControl->head != NULL) { // if head already exists
+			if (StrategyControl->tail->buf_id == buf_id) { 	// if curr is tail
 				StrategyControl->tail = curr->prev; 	// point to prev buffer
 				curr->prev->next = NULL; 	// remove reference to curr pointer
+			} else if (StrategyControl->head->buf_id == bud_id) { // if curr is head
+				// do nothing
 			} else {
 				curr->prev->next = curr->next; 
 				curr->next->prev = curr->prev;
 			}
-			StrategyControl->head->prev = curr;
-			curr->next = StrategyControl->head;
-			curr->prev = NULL;
-			StrategyControl->head = curr;
-		}
+			StrategyControl->head->prev = curr; // set prev head to point at curr
+			curr->next = StrategyControl->head; // set curr to point at prev head
+		} else {
+			curr->next = NULL;
+			StrategyControl->tail = curr;
+		} 
+		curr->prev = NULL;
+		StrategyControl->head = curr;
 	}
 }
 
