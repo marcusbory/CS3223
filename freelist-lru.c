@@ -419,7 +419,7 @@ StrategyGetBuffer(BufferAccessStrategy strategy, uint32 *buf_state)
 	/* Nothing on the freelist, so run the LRU algorithm */
 	for (;;)
 	{
-		buf = GetBufferDescriptor(StrategyControl->tail);
+		buf = GetBufferDescriptor(StrategyControl->tail->buf_id);
 
 		local_buf_state = LockBufHdr(buf);
 
