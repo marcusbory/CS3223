@@ -212,18 +212,18 @@ StrategyUpdateAccessedBuffer(int buf_id, bool delete)
 	// elog(ERROR, "StrategyUpdateAccessedBuffer: Not implemented!");
 	StackBuffer* curr = &lruStack[buf_id];
 	if (delete) {	// C4, remove buffer from stack
-		if (StrategyControl->head->buf_id == buf_id) { 		// if is head
-			StrategyControl->head = curr->next;		// point to next buffer
-			curr->next->prev = NULL;	// remove reference to curr pointer
-		} else if (StrategyControl->tail->buf_id == buf_id) { 	// if is tail
-			StrategyControl->tail = curr->prev; 	// point to prev buffer
-			curr->prev->next = NULL; 	// remove reference to curr pointer
-		} else {
-			curr->prev->next = curr->next; 
-			curr->next->prev = curr->prev;
-		}
-		curr->next = NULL;	
-		curr->prev = NULL;	// remove page from stack
+		// if (StrategyControl->head->buf_id == buf_id) { 		// if is head
+		// 	StrategyControl->head = curr->next;		// point to next buffer
+		// 	curr->next->prev = NULL;	// remove reference to curr pointer
+		// } else if (StrategyControl->tail->buf_id == buf_id) { 	// if is tail
+		// 	StrategyControl->tail = curr->prev; 	// point to prev buffer
+		// 	curr->prev->next = NULL; 	// remove reference to curr pointer
+		// } else {
+		// 	curr->prev->next = curr->next; 
+		// 	curr->next->prev = curr->prev;
+		// }
+		// curr->next = NULL;	
+		// curr->prev = NULL;	// remove page from stack
 	} else {	// C1, move buffer to top of stack
 		if (StrategyControl->head != NULL) { // if head already exists
 			if (StrategyControl->tail->buf_id == buf_id) { 	// if curr is tail
@@ -265,7 +265,6 @@ StrategyGetBuffer(BufferAccessStrategy strategy, uint32 *buf_state)
 {
 	BufferDesc *buf;
 	int			bgwprocno;
-	int			trycounter;
 	uint32		local_buf_state;	/* to avoid repeated (de-)referencing */
 	/* cs3223 */
 	StackBuffer* curr;
@@ -375,50 +374,6 @@ StrategyGetBuffer(BufferAccessStrategy strategy, uint32 *buf_state)
 			UnlockBufHdr(buf, local_buf_state);
 		}
 	}
-
-	// /* Nothing on the freelist, so run the "clock sweep" algorithm */
-	// trycounter = NBuffers;
-	// for (;;)
-	// {
-	// 	buf = GetBufferDescriptor(ClockSweepTick());
-
-	// 	/*
-	// 	 * If the buffer is pinned or has a nonzero usage_count, we cannot use
-	// 	 * it; decrement the usage_count (unless pinned) and keep scanning.
-	// 	 */
-	// 	local_buf_state = LockBufHdr(buf);
-
-	// 	if (BUF_STATE_GET_REFCOUNT(local_buf_state) == 0)
-	// 	{
-	// 		if (BUF_STATE_GET_USAGECOUNT(local_buf_state) != 0)
-	// 		{
-	// 			local_buf_state -= BUF_USAGECOUNT_ONE;
-
-	// 			trycounter = NBuffers;
-	// 		}
-	// 		else
-	// 		{
-	// 			/* Found a usable buffer */
-	// 			if (strategy != NULL)
-	// 				AddBufferToRing(strategy, buf);
-	// 			*buf_state = local_buf_state;
-	// 			return buf;
-	// 		}
-	// 	}
-	// 	else if (--trycounter == 0)
-	// 	{
-	// 		/*
-	// 		 * We've scanned all the buffers without making any state changes,
-	// 		 * so all the buffers are pinned (or were when we looked at them).
-	// 		 * We could hope that someone will free one eventually, but it's
-	// 		 * probably better to fail than to risk getting stuck in an
-	// 		 * infinite loop.
-	// 		 */
-	// 		UnlockBufHdr(buf, local_buf_state);
-	// 		elog(ERROR, "no unpinned buffers available");
-	// 	}
-	// 	UnlockBufHdr(buf, local_buf_state);
-	// }
 
 	/* cs3223 */
 	/* Nothing on the freelist, so run the LRU algorithm */
