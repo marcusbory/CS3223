@@ -209,7 +209,7 @@ have_free_buffer(void)
 void
 StrategyUpdateAccessedBuffer(int buf_id, bool delete)
 {
-	elog(ERROR, "StrategyUpdateAccessedBuffer: Not implemented!");
+	// elog(ERROR, "StrategyUpdateAccessedBuffer: Not implemented!");
 	StackBuffer* curr = &lruStack[buf_id];
 	if (delete) {	// C4, remove buffer from stack
 		// if (StrategyControl->head->buf_id == buf_id) { 		// if is head
