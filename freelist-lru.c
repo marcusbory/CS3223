@@ -375,31 +375,32 @@ StrategyGetBuffer(BufferAccessStrategy strategy, uint32 *buf_state)
 	}
 
 	/* CS3223 Nothing on the freelist, so run the LRU algorithm */
-	for (;;)
-	{
-		buf = (StrategyControl->tail != NULL) ? GetBufferDescriptor(StrategyControl->tail->buf_id) : NULL;
+	int curr_buf = (StrategyControl->tail != NULL) ? StrategyControl->tail->buf_id : -1;
 
-		if (buf->buf_id >= 0 && buf->buf_id < NBuffers) {
-			/*
-			* If the buffer is pinned or has a nonzero usage_count, we cannot use
-			* it; decrement the usage_count (unless pinned) and keep scanning.
-			*/
-			local_buf_state = LockBufHdr(buf);
+	while (curr_buf >= 0 && curr_buf < NBuffers) {
+		/*
+		* If the buffer is pinned or has a nonzero usage_count, we cannot use
+		* it; decrement the usage_count (unless pinned) and keep scanning.
+		*/
+		buf = GetBufferDescriptor(curr_buf);
+		local_buf_state = LockBufHdr(buf);
 
-			if (BUF_STATE_GET_REFCOUNT(local_buf_state) == 0)
+		if (BUF_STATE_GET_REFCOUNT(local_buf_state) == 0)
+		{
+			if (BUF_STATE_GET_USAGECOUNT(local_buf_state) != 0)
 			{
-				if (BUF_STATE_GET_USAGECOUNT(local_buf_state) != 0)
-				{
-					local_buf_state -= BUF_USAGECOUNT_ONE;
-				}
-				StrategyUpdateAccessedBuffer(buf->buf_id, false);
-				UnlockBufHdr(buf, local_buf_state);
-				return buf;
+				local_buf_state -= BUF_USAGECOUNT_ONE;
 			}
+			StrategyUpdateAccessedBuffer(buf->buf_id, false);
 			UnlockBufHdr(buf, local_buf_state);
-			buf = buf->prev;
+			return buf;
 		}
+		UnlockBufHdr(buf, local_buf_state);
+		curr_buf = lruStack[curr_buf]->prev->buf_id;
 	}
+
+	return NULL;
+
 }
 
 /*
