@@ -367,8 +367,6 @@ StrategyGetBuffer(BufferAccessStrategy strategy, uint32 *buf_state)
 				if (strategy != NULL)
 					AddBufferToRing(strategy, buf);
 				*buf_state = local_buf_state;
-				/* cs3223 */
-				StrategyUpdateAccessedBuffer(buf->buf_id, false);
 				return buf;
 			}
 			UnlockBufHdr(buf, local_buf_state);
@@ -431,17 +429,19 @@ StrategyGetBuffer(BufferAccessStrategy strategy, uint32 *buf_state)
 			if (strategy != NULL)
 				AddBufferToRing(strategy, buf);
 			*buf_state = local_buf_state;
-			/* cs3223 */
+			/* cs3223*/
 			StrategyUpdateAccessedBuffer(buf->buf_id, false);
+			UnlockBufHdr(buf, local_buf_state);
 			return buf;
-		}
-		if (StrategyControl->head->buf_id == buf->buf_id) {
-			return NULL;
 		}
 		curr = &lruStack[buf->buf_id];
 		UnlockBufHdr(buf, local_buf_state);
 		buf = GetBufferDescriptor(curr->prev->buf_id);
 	}
+
+	elog(ERROR, "No unpinned buffer available.");
+
+	return NULL;
 }
 
 /*
