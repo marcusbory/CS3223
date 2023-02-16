@@ -46,6 +46,10 @@ typedef struct
 	 * when the list is empty)
 	 */
 
+	/* cs3223 head and tail pointers */
+	StackBuffer* head;
+	StackBuffer* tail;
+
 	/*
 	 * Statistics.  These counters should be wide enough that they can't
 	 * overflow during a single bgwriter cycle.
@@ -96,8 +100,15 @@ typedef struct BufferAccessStrategyData
 	Buffer		buffers[FLEXIBLE_ARRAY_MEMBER];
 }			BufferAccessStrategyData;
 
-
 /* cs3223 */
+typedef struct 
+{
+	int buf_id;
+	StackBuffer* next;
+	StackBuffer* prev;
+} StackBuffer;
+static StackBuffer *lruStack = NULL;
+
 void StrategyUpdateAccessedBuffer(int buf_id, bool delete);
 
 /* Prototypes for internal functions */
@@ -196,7 +207,22 @@ have_free_buffer(void)
 void
 StrategyUpdateAccessedBuffer(int buf_id, bool delete)
 {
-	elog(ERROR, "StrategyUpdateAccessedBuffer: Not implemented!");
+	// elog(ERROR, "StrategyUpdateAccessedBuffer: Not implemented!");
+	if (delete) {	// C4, remove buffer from stack
+		StackBuffer* curr = &lruStack[buf_id];
+		if (StrategyControl->head->buf_id == buf_id) { // buf_id is head
+			StrategyControl->head = curr->next;	// point to next buffer
+			curr->next->prev = NULL;	// remove reference to curr pointer
+		} else {
+			curr->prev->next = curr->next;
+			if (curr->next != NULL) {
+				curr->next->prev = curr->prev;
+			}
+		}
+		if (StrategyControl->tail == buf_id)
+		curr->next = NULL;
+		curr->prev = NULL;
+	}
 }
 
 
@@ -530,6 +556,11 @@ StrategyInitialize(bool init)
 		/* Initialize the clock sweep pointer */
 		pg_atomic_init_u32(&StrategyControl->nextVictimBuffer, 0);
 
+		/* cs3223
+		init empty stack */
+		StrategyControl->head = NULL;
+		StrategyControl->tail = NULL;
+
 		/* Clear statistics */
 		StrategyControl->completePasses = 0;
 		pg_atomic_init_u32(&StrategyControl->numBufferAllocs, 0);
@@ -539,6 +570,23 @@ StrategyInitialize(bool init)
 	}
 	else
 		Assert(!init);
+
+	/* cs3223 init lruStack */
+	bool stackFound;
+
+	lruStack = (StackBuffer*) ShmemInitStruct("LRU Stack", NBuffers * sizeof(StackBuffer), &stackFound);
+	if (!stackFound) {
+		Assert(init);
+		StackBuffer sb = &lruStack;
+		for (int i = 0; i < NBuffers; sb++, i++) {
+			sb->prev = NULL;
+			sb->next = NULL;
+			sb->buf_id = i;
+		}
+	}
+	else
+		Assert(!init);
+
 }
 
 
