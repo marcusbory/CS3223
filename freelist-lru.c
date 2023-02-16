@@ -210,38 +210,38 @@ void
 StrategyUpdateAccessedBuffer(int buf_id, bool delete)
 {
 	// elog(ERROR, "StrategyUpdateAccessedBuffer: Not implemented!");
-	// if (delete) {	// C4, remove buffer from stack
-	// 	StackBuffer* curr = &lruStack[buf_id];
-	// 	if (StrategyControl->head->buf_id == buf_id) { 		// if is head
-	// 		StrategyControl->head = curr->next;		// point to next buffer
-	// 		curr->next->prev = NULL;	// remove reference to curr pointer
-	// 	} else if (StrategyControl->tail->buf_id == buf_id) { 	// if is tail
-	// 		StrategyControl->tail = curr->prev; 	// point to prev buffer
-	// 		curr->prev->next = NULL; 	// remove reference to curr pointer
-	// 	} else {
-	// 		curr->prev->next = curr->next; 
-	// 		curr->next->prev = curr->prev;
-	// 	}
-	// 	curr->next = NULL;	
-	// 	curr->prev = NULL;	// remove page from stack
-	// } else {	// C1, move buffer to top of stack
-	// 	StackBuffer* curr = &lruStack[buf_id];
-	// 	if (StrategyControl->head->buf_id == buf_id) { 		// if is head
-	// 		// do nothing
-	// 	} else {
-	// 		if (StrategyControl->tail->buf_id == buf_id) { 	// if is tail
-	// 			StrategyControl->tail = curr->prev; 	// point to prev buffer
-	// 			curr->prev->next = NULL; 	// remove reference to curr pointer
-	// 		} else {
-	// 			curr->prev->next = curr->next; 
-	// 			curr->next->prev = curr->prev;
-	// 		}
-	// 		StrategyControl->head->prev = curr;
-	// 		curr->next = StrategyControl->head;
-	// 		curr->prev = NULL;
-	// 		StrategyControl->head = curr;
-	// 	}
-	// }
+	if (delete) {	// C4, remove buffer from stack
+		StackBuffer* curr = &lruStack[buf_id];
+		if (StrategyControl->head->buf_id == buf_id) { 		// if is head
+			StrategyControl->head = current->next;		// point to next buffer
+			curr->next->prev = NULL;	// remove reference to curr pointer
+		} else if (StrategyControl->tail->buf_id == buf_id) { 	// if is tail
+			StrategyControl->tail = curr->prev; 	// point to prev buffer
+			curr->prev->next = NULL; 	// remove reference to curr pointer
+		} else {
+			curr->prev->next = curr->next; 
+			curr->next->prev = curr->prev;
+		}
+		curr->next = NULL;	
+		curr->prev = NULL;	// remove page from stack
+	} else {	// C1, move buffer to top of stack
+		// StackBuffer* curr = &lruStack[buf_id];
+		// if (StrategyControl->head->buf_id == buf_id) { 		// if is head
+		// 	// do nothing
+		// } else {
+		// 	if (StrategyControl->tail->buf_id == buf_id) { 	// if is tail
+		// 		StrategyControl->tail = curr->prev; 	// point to prev buffer
+		// 		curr->prev->next = NULL; 	// remove reference to curr pointer
+		// 	} else {
+		// 		curr->prev->next = curr->next; 
+		// 		curr->next->prev = curr->prev;
+		// 	}
+		// 	StrategyControl->head->prev = curr;
+		// 	curr->next = StrategyControl->head;
+		// 	curr->prev = NULL;
+		// 	StrategyControl->head = curr;
+		// }
+	}
 }
 
 
