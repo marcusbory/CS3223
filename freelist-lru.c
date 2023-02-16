@@ -596,7 +596,7 @@ StrategyInitialize(bool init)
 	lruStack = (StackBuffer*) ShmemInitStruct("LRU Stack", NBuffers * sizeof(StackBuffer), &stackFound);
 	if (!stackFound) {
 		Assert(init);
-		StackBuffer *sb = &lruStack;
+		StackBuffer *sb = lruStack;
 		for (int i = 0; i < NBuffers; sb++, i++) {
 			sb->prev = NULL;
 			sb->next = NULL;
