@@ -228,17 +228,17 @@ StrategyUpdateAccessedBuffer(int buf_id, bool delete)
 		if (StrategyControl->head->buf_id == buf_id) { 		// if is head
 			// do nothing
 		} else {
-			// if (StrategyControl->tail->buf_id == buf_id) { 	// if is tail
-			// 	StrategyControl->tail = curr->prev; 	// point to prev buffer
-			// 	curr->prev->next = NULL; 	// remove reference to curr pointer
-			// } else {
-			// 	curr->prev->next = curr->next; 
-			// 	curr->next->prev = curr->prev;
-			// }
-			// StrategyControl->head->prev = curr;
-			// curr->next = StrategyControl->head;
-			// curr->prev = NULL;
-			// StrategyControl->head = curr;
+			if (StrategyControl->tail->buf_id == buf_id) { 	// if is tail
+				StrategyControl->tail = curr->prev; 	// point to prev buffer
+				curr->prev->next = NULL; 	// remove reference to curr pointer
+			} else {
+				curr->prev->next = curr->next; 
+				curr->next->prev = curr->prev;
+			}
+			StrategyControl->head->prev = curr;
+			curr->next = StrategyControl->head;
+			curr->prev = NULL;
+			StrategyControl->head = curr;
 		}
 	}
 }
