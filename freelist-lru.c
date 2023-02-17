@@ -228,9 +228,10 @@ StrategyUpdateAccessedBuffer(int buf_id, bool delete)
 		if (curr->next == -1 && curr->prev == -1) {				// not in list
 			curr->next = StrategyControl->head;
 			curr->prev = -1;
-			if (StrategyControl->head == -1) {					// no head
+			if (StrategyControl->head == -1) {					// no head (empty list)
 				StrategyControl->tail = buf_id;
 				curr->next = -1;
+				curr->prev = -1;
 			} else {
 				lruStack[StrategyControl->head].prev = buf_id;
 			}
@@ -402,10 +403,10 @@ StrategyGetBuffer(BufferAccessStrategy strategy, uint32 *buf_state)
 			StrategyUpdateAccessedBuffer(buf->buf_id, false);
 			return buf;
 		}
-		if (StrategyControl->head == curr_buf) {
-			elog(ERROR, "no unpinned buffers available");
-			return NULL;
-		}
+		// if (StrategyControl->head == curr_buf) {
+		// 	elog(ERROR, "no unpinned buffers available");
+		// 	return NULL;
+		// }
 		UnlockBufHdr(buf, local_buf_state);
 		curr_buf = lruStack[curr_buf].prev;
 	}
