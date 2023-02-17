@@ -228,20 +228,20 @@ StrategyUpdateAccessedBuffer(int buf_id, bool delete)
 		if (StrategyControl->head != -1) { // if head already exists
 			if (StrategyControl->tail == buf_id) { 	// if curr is tail
 				StrategyControl->tail = curr->prev; 	// point to prev buffer
-				lruStack[curr->prev]->next = -1; 	// remove reference to curr pointer
+				&lruStack[curr->prev]->next = -1; 	// remove reference to curr pointer
 			} else if (StrategyControl->head == buf_id) { // if curr is head
 				// do nothing
 			} else {
-				lruStack[curr->prev]->next = lruStack[curr]->next; 
-				lruStack[curr->next]->prev = lruStack[curr]->prev;
+				&lruStack[curr->prev]->next = &lruStack[curr]->next; 
+				&lruStack[curr->next]->prev = &lruStack[curr]->prev;
 			}
-			lruStack[StrategyControl->head]->prev = buf_id; // set prev head to point at curr
-			lruStack[curr]->next = StrategyControl->head; // set curr to point at prev head
+			&lruStack[StrategyControl->head]->prev = buf_id; // set prev head to point at curr
+			&lruStack[curr]->next = StrategyControl->head; // set curr to point at prev head
 		} else {
-			lruStack[curr]->next = -1;
+			&lruStack[curr]->next = -1;
 			StrategyControl->tail = buf_id;
 		} 
-		lruStack[curr]->prev = -1;
+		&lruStack[curr]->prev = -1;
 		StrategyControl->head = buf_id;
 	}
 }
@@ -396,7 +396,7 @@ StrategyGetBuffer(BufferAccessStrategy strategy, uint32 *buf_state)
 			return buf;
 		}
 		UnlockBufHdr(buf, local_buf_state);
-		curr_buf = lruStack[curr_buf]->prev;
+		curr_buf = &lruStack[curr_buf]->prev;
 	}
 
 	return NULL;
@@ -567,8 +567,8 @@ StrategyInitialize(bool init)
 
 		/* cs3223
 		init empty stack */
-		StrategyControl->head = NULL;
-		StrategyControl->tail = NULL;
+		StrategyControl->head = -1;
+		StrategyControl->tail = -1;
 
 		/* Clear statistics */
 		StrategyControl->completePasses = 0;
