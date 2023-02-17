@@ -594,9 +594,9 @@ StrategyInitialize(bool init)
 		Assert(init);
 		StackBuffer *sb = lruStack;
 		for (int i = 0; i < NBuffers; i++) {
-			sb->prev = -1;
-			sb->next = -1;
-			sb->buf_id = i;
+			sb[i]->prev = -1;
+			sb[i]->next = -1;
+			sb[i]->buf_id = i;
 		}
 	}
 	else
