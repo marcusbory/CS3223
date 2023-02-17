@@ -211,7 +211,7 @@ StrategyUpdateAccessedBuffer(int buf_id, bool delete)
 {
 	// elog(ERROR, "StrategyUpdateAccessedBuffer: Not implemented!");
 	StackBuffer* curr = &lruStack[buf_id];
-	if (delete) {	// C4, remove buffer from stack
+	if (delete) {												// C4, remove buffer from stack
 		if (StrategyControl->head == buf_id) { 					// if is head
 			StrategyControl->head = curr->next;					// point to next buffer
 			lruStack[curr->next].prev = -1;						// remove reference to curr pointer
@@ -223,26 +223,39 @@ StrategyUpdateAccessedBuffer(int buf_id, bool delete)
 			lruStack[curr->next].prev = curr->prev;
 		}
 		curr->next = -1;	
-		curr->prev = -1;	// remove page from stack
-	} else {	// C1, move buffer to top of stack
-		if (StrategyControl->head != -1) { // if head already exists
-			if (StrategyControl->tail == buf_id) { 	// if curr is tail
-				StrategyControl->tail = curr->prev; 	// point to prev buffer
-				lruStack[curr->prev].next = -1; 	// remove reference to curr pointer
-			} else if (StrategyControl->head == buf_id) { // if curr is head
-				// do nothing
+		curr->prev = -1;										// remove page from stack
+	} else {													// C1, move buffer to top of stack
+		if (curr->next == -1 && curr->prev == -1) {				// not in list
+			curr->next = StrategyControl->head;
+			curr->prev = -1;
+			if (StrategyControl->head == -1) {					// no head
+				StrategyControl->head = buf_id;
+				StrategyControl->tail = buf_id;
+				curr->next = -1;
 			} else {
-				lruStack[curr->prev].next = lruStack[buf_id].next; 
-				lruStack[curr->next].prev = lruStack[buf_id].prev;
+				lruStack[StrategyControl->head].prev = buf_id;
 			}
-			lruStack[StrategyControl->head].prev = buf_id; // set prev head to point at curr
-			lruStack[buf_id].next = StrategyControl->head; // set curr to point at prev head
-		} else {
-			lruStack[buf_id].next = -1;
-			StrategyControl->tail = buf_id;
-		} 
-		lruStack[buf_id].prev = -1;
-		StrategyControl->head = buf_id;
+		} else {												// in list
+			if (StrategyControl->head == buf_id) { 				// if curr is head
+				// do nothing
+				return;
+			} else if (StrategyControl->tail == buf_id) {		// if curr is tail
+				lruStack[curr->prev].next = -1;					// prev pointer point to end
+				StrategyControl->tail = lruStack[curr->prev].buf_id; // tail point to prev pointer
+				lruStack[StrategyControl->head].prev = buf_id;	// head prev point to curr
+				StrategyControl->head = buf_id;					// head point to curr
+				curr->next = StrategyControl->head;				// curr next point to head
+				curr->prev = -1;								// curr prev point to end
+			} else {
+				lruStack[curr->prev].next = curr->next;			
+				lruStack[curr->next].prev = curr->prev;
+				lruStack[StrategyControl->head].prev = buf_id;	// head prev point to curr
+				StrategyControl->head = buf_id;					// head point to curr
+				curr->next = StrategyControl->head;				// curr next point to head
+				curr->prev = -1;								// curr prev point to end
+			}
+		}
+		
 	}
 }
 
