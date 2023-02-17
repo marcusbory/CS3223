@@ -210,40 +210,40 @@ void
 StrategyUpdateAccessedBuffer(int buf_id, bool delete)
 {
 	// elog(ERROR, "StrategyUpdateAccessedBuffer: Not implemented!");
-	StackBuffer* curr = &lruStack[buf_id];
-	if (delete) {	// C4, remove buffer from stack
-		// if (StrategyControl->head->buf_id == buf_id) { 		// if is head
-		// 	StrategyControl->head = curr->next;		// point to next buffer
-		// 	curr->next->prev = NULL;	// remove reference to curr pointer
-		// } else if (StrategyControl->tail->buf_id == buf_id) { 	// if is tail
-		// 	StrategyControl->tail = curr->prev; 	// point to prev buffer
-		// 	curr->prev->next = NULL; 	// remove reference to curr pointer
-		// } else {
-		// 	curr->prev->next = curr->next; 
-		// 	curr->next->prev = curr->prev;
-		// }
-		// curr->next = NULL;	
-		// curr->prev = NULL;	// remove page from stack
-	} else {	// C1, move buffer to top of stack
-		if (StrategyControl->head != -1) { // if head already exists
-			if (StrategyControl->tail == buf_id) { 	// if curr is tail
-				StrategyControl->tail = curr->prev; 	// point to prev buffer
-				lruStack[curr->prev].next = -1; 	// remove reference to curr pointer
-			} else if (StrategyControl->head == buf_id) { // if curr is head
-				// do nothing
-			} else {
-				lruStack[curr->prev].next = lruStack[buf_id].next; 
-				lruStack[curr->next].prev = lruStack[buf_id].prev;
-			}
-			lruStack[StrategyControl->head].prev = buf_id; // set prev head to point at curr
-			lruStack[buf_id].next = StrategyControl->head; // set curr to point at prev head
-		} else {
-			lruStack[buf_id].next = -1;
-			StrategyControl->tail = buf_id;
-		} 
-		lruStack[buf_id].prev = -1;
-		StrategyControl->head = buf_id;
-	}
+	// StackBuffer* curr = &lruStack[buf_id];
+	// if (delete) {	// C4, remove buffer from stack
+	// 	// if (StrategyControl->head->buf_id == buf_id) { 		// if is head
+	// 	// 	StrategyControl->head = curr->next;		// point to next buffer
+	// 	// 	curr->next->prev = NULL;	// remove reference to curr pointer
+	// 	// } else if (StrategyControl->tail->buf_id == buf_id) { 	// if is tail
+	// 	// 	StrategyControl->tail = curr->prev; 	// point to prev buffer
+	// 	// 	curr->prev->next = NULL; 	// remove reference to curr pointer
+	// 	// } else {
+	// 	// 	curr->prev->next = curr->next; 
+	// 	// 	curr->next->prev = curr->prev;
+	// 	// }
+	// 	// curr->next = NULL;	
+	// 	// curr->prev = NULL;	// remove page from stack
+	// } else {	// C1, move buffer to top of stack
+	// 	if (StrategyControl->head != -1) { // if head already exists
+	// 		if (StrategyControl->tail == buf_id) { 	// if curr is tail
+	// 			StrategyControl->tail = curr->prev; 	// point to prev buffer
+	// 			lruStack[curr->prev].next = -1; 	// remove reference to curr pointer
+	// 		} else if (StrategyControl->head == buf_id) { // if curr is head
+	// 			// do nothing
+	// 		} else {
+	// 			lruStack[curr->prev].next = lruStack[buf_id].next; 
+	// 			lruStack[curr->next].prev = lruStack[buf_id].prev;
+	// 		}
+	// 		lruStack[StrategyControl->head].prev = buf_id; // set prev head to point at curr
+	// 		lruStack[buf_id].next = StrategyControl->head; // set curr to point at prev head
+	// 	} else {
+	// 		lruStack[buf_id].next = -1;
+	// 		StrategyControl->tail = buf_id;
+	// 	} 
+	// 	lruStack[buf_id].prev = -1;
+	// 	StrategyControl->head = buf_id;
+	// }
 }
 
 
@@ -377,28 +377,24 @@ StrategyGetBuffer(BufferAccessStrategy strategy, uint32 *buf_state)
 	/* CS3223 Nothing on the freelist, so run the LRU algorithm */
 	int curr_buf = StrategyControl->tail;
 
-	while (curr_buf >= 0 && curr_buf < NBuffers) {
-		/*
-		* If the buffer is pinned or has a nonzero usage_count, we cannot use
-		* it; decrement the usage_count (unless pinned) and keep scanning.
-		*/
+	for (;;) {
 		buf = GetBufferDescriptor(curr_buf);
 		local_buf_state = LockBufHdr(buf);
-
 		if (BUF_STATE_GET_REFCOUNT(local_buf_state) == 0)
 		{
-			if (BUF_STATE_GET_USAGECOUNT(local_buf_state) != 0)
-			{
-				local_buf_state -= BUF_USAGECOUNT_ONE;
-			}
+			if (strategy != NULL)
+				AddBufferToRing(strategy, buf);
+			*buf_state = local_buf_state;
 			StrategyUpdateAccessedBuffer(buf->buf_id, false);
-			UnlockBufHdr(buf, local_buf_state);
 			return buf;
 		}
+		if (StrategyControl->head == curr_buf) {
+			elog(ERROR, "no unpinned buffers available");
+			return NULL;
+		}
 		UnlockBufHdr(buf, local_buf_state);
-		curr_buf = lruStack[curr_buf].prev;
+		curr_buf = lruStack[buf]->prev;
 	}
-
 	return NULL;
 
 }
@@ -422,7 +418,7 @@ StrategyFreeBuffer(BufferDesc *buf)
 			StrategyControl->lastFreeBuffer = buf->buf_id;
 		StrategyControl->firstFreeBuffer = buf->buf_id;
 		/* cs3223 C4 delete from stack*/
-		// StrategyUpdateAccessedBuffer(buf->buf_id, true);
+		StrategyUpdateAccessedBuffer(buf->buf_id, true);
 	}
 
 	SpinLockRelease(&StrategyControl->buffer_strategy_lock);
@@ -585,9 +581,9 @@ StrategyInitialize(bool init)
 		Assert(init);
 		StackBuffer *sb = lruStack;
 		for (int i = 0; i < NBuffers; i++) {
-			sb[i].prev = -1;
-			sb[i].next = -1;
-			sb[i].buf_id = i;
+			sb->prev = -1;
+			sb->next = -1;
+			sb->buf_id = i;
 		}
 	}
 	else
