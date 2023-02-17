@@ -515,6 +515,9 @@ StrategyShmemSize(void)
 	/* size of the shared replacement strategy control block */
 	size = add_size(size, MAXALIGN(sizeof(BufferStrategyControl)));
 
+	/* cs3223 lrustack */
+	size = add_size(size, MAXALIGN(NBuffers*sizeof(lruStack)));
+
 	return size;
 }
 
