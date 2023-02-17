@@ -367,6 +367,8 @@ StrategyGetBuffer(BufferAccessStrategy strategy, uint32 *buf_state)
 				if (strategy != NULL)
 					AddBufferToRing(strategy, buf);
 				*buf_state = local_buf_state;
+				/* cs3223 */
+				StrategyUpdateAccessedBuffer(buf->buf_id, false);
 				return buf;
 			}
 			UnlockBufHdr(buf, local_buf_state);
