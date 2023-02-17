@@ -229,12 +229,12 @@ StrategyUpdateAccessedBuffer(int buf_id, bool delete)
 			curr->next = StrategyControl->head;
 			curr->prev = -1;
 			if (StrategyControl->head == -1) {					// no head
-				StrategyControl->head = buf_id;
 				StrategyControl->tail = buf_id;
 				curr->next = -1;
 			} else {
 				lruStack[StrategyControl->head].prev = buf_id;
 			}
+			StrategyControl->head = buf_id;
 		} else {												// in list
 			if (StrategyControl->head == buf_id) { 				// if curr is head
 				// do nothing
