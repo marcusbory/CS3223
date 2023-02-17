@@ -265,7 +265,6 @@ StrategyGetBuffer(BufferAccessStrategy strategy, uint32 *buf_state)
 {
 	BufferDesc *buf;
 	int			bgwprocno;
-	int			trycounter;
 	uint32		local_buf_state;	/* to avoid repeated (de-)referencing */
 
 	/*
@@ -393,7 +392,7 @@ StrategyGetBuffer(BufferAccessStrategy strategy, uint32 *buf_state)
 			return NULL;
 		}
 		UnlockBufHdr(buf, local_buf_state);
-		curr_buf = lruStack[buf]->prev;
+		curr_buf = lruStack[curr_buf]->prev;
 	}
 	return NULL;
 
