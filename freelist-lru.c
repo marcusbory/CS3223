@@ -232,16 +232,16 @@ StrategyUpdateAccessedBuffer(int buf_id, bool delete)
 			} else if (StrategyControl->head == buf_id) { // if curr is head
 				// do nothing
 			} else {
-				&lruStack[curr->prev]->next = &lruStack[curr]->next; 
-				&lruStack[curr->next]->prev = &lruStack[curr]->prev;
+				&lruStack[curr->prev].next = &lruStack[buf_id].next; 
+				&lruStack[curr->next].prev = &lruStack[buf_id].prev;
 			}
 			&lruStack[StrategyControl->head]->prev = buf_id; // set prev head to point at curr
-			&lruStack[curr]->next = StrategyControl->head; // set curr to point at prev head
+			&lruStack[buf_id].next = StrategyControl->head; // set curr to point at prev head
 		} else {
-			&lruStack[curr]->next = -1;
+			&lruStack[buf_id].next = -1;
 			StrategyControl->tail = buf_id;
 		} 
-		&lruStack[curr]->prev = -1;
+		&lruStack[buf_id]->prev = -1;
 		StrategyControl->head = buf_id;
 	}
 }
