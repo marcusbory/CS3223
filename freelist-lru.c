@@ -210,40 +210,40 @@ void
 StrategyUpdateAccessedBuffer(int buf_id, bool delete)
 {
 	// elog(ERROR, "StrategyUpdateAccessedBuffer: Not implemented!");
-	// StackBuffer* curr = &lruStack[buf_id];
-	// if (delete) {	// C4, remove buffer from stack
-	// 	// if (StrategyControl->head->buf_id == buf_id) { 		// if is head
-	// 	// 	StrategyControl->head = curr->next;		// point to next buffer
-	// 	// 	curr->next->prev = NULL;	// remove reference to curr pointer
-	// 	// } else if (StrategyControl->tail->buf_id == buf_id) { 	// if is tail
-	// 	// 	StrategyControl->tail = curr->prev; 	// point to prev buffer
-	// 	// 	curr->prev->next = NULL; 	// remove reference to curr pointer
-	// 	// } else {
-	// 	// 	curr->prev->next = curr->next; 
-	// 	// 	curr->next->prev = curr->prev;
-	// 	// }
-	// 	// curr->next = NULL;	
-	// 	// curr->prev = NULL;	// remove page from stack
-	// } else {	// C1, move buffer to top of stack
-	// 	if (StrategyControl->head != -1) { // if head already exists
-	// 		if (StrategyControl->tail == buf_id) { 	// if curr is tail
-	// 			StrategyControl->tail = curr->prev; 	// point to prev buffer
-	// 			lruStack[curr->prev].next = -1; 	// remove reference to curr pointer
-	// 		} else if (StrategyControl->head == buf_id) { // if curr is head
-	// 			// do nothing
-	// 		} else {
-	// 			lruStack[curr->prev].next = lruStack[buf_id].next; 
-	// 			lruStack[curr->next].prev = lruStack[buf_id].prev;
-	// 		}
-	// 		lruStack[StrategyControl->head].prev = buf_id; // set prev head to point at curr
-	// 		lruStack[buf_id].next = StrategyControl->head; // set curr to point at prev head
-	// 	} else {
-	// 		lruStack[buf_id].next = -1;
-	// 		StrategyControl->tail = buf_id;
-	// 	} 
-	// 	lruStack[buf_id].prev = -1;
-	// 	StrategyControl->head = buf_id;
-	// }
+	StackBuffer* curr = &lruStack[buf_id];
+	if (delete) {	// C4, remove buffer from stack
+		if (StrategyControl->head == buf_id) { 					// if is head
+			StrategyControl->head = curr->next;					// point to next buffer
+			lruStack[curr->next].prev = -1;						// remove reference to curr pointer
+		} else if (StrategyControl->tail == buf_id) { 			// if is tail
+			StrategyControl->tail = curr->prev; 				// point to prev buffer
+			lruStack[curr->prev].next = -1;						// remove reference to curr pointer
+		} else {
+			lruStack[curr->prev].next = curr->next;
+			lruStack[curr->next].prev = curr->prev;
+		}
+		curr->next = -1;	
+		curr->prev = -1;	// remove page from stack
+	} else {	// C1, move buffer to top of stack
+		if (StrategyControl->head != -1) { // if head already exists
+			if (StrategyControl->tail == buf_id) { 	// if curr is tail
+				StrategyControl->tail = curr->prev; 	// point to prev buffer
+				lruStack[curr->prev].next = -1; 	// remove reference to curr pointer
+			} else if (StrategyControl->head == buf_id) { // if curr is head
+				// do nothing
+			} else {
+				lruStack[curr->prev].next = lruStack[buf_id].next; 
+				lruStack[curr->next].prev = lruStack[buf_id].prev;
+			}
+			lruStack[StrategyControl->head].prev = buf_id; // set prev head to point at curr
+			lruStack[buf_id].next = StrategyControl->head; // set curr to point at prev head
+		} else {
+			lruStack[buf_id].next = -1;
+			StrategyControl->tail = buf_id;
+		} 
+		lruStack[buf_id].prev = -1;
+		StrategyControl->head = buf_id;
+	}
 }
 
 
@@ -390,7 +390,7 @@ StrategyGetBuffer(BufferAccessStrategy strategy, uint32 *buf_state)
 			return buf;
 		}
 		if (StrategyControl->head == curr_buf) {
-			// elog(ERROR, "no unpinned buffers available");
+			elog(ERROR, "no unpinned buffers available");
 			return NULL;
 		}
 		UnlockBufHdr(buf, local_buf_state);
