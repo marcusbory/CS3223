@@ -49,8 +49,8 @@ typedef struct
 	 */
 
 	/* cs3223 head and tail pointers */
-	StackBuffer* head;
-	StackBuffer* tail;
+	int head;
+	int tail;
 
 	/*
 	 * Statistics.  These counters should be wide enough that they can't
@@ -106,8 +106,8 @@ typedef struct BufferAccessStrategyData
 struct StackBuffer
 {
 	int buf_id;
-	StackBuffer* next;
-	StackBuffer* prev;
+	int next;
+	int prev;
 };
 static StackBuffer* lruStack = NULL;
 
@@ -225,24 +225,24 @@ StrategyUpdateAccessedBuffer(int buf_id, bool delete)
 		// curr->next = NULL;	
 		// curr->prev = NULL;	// remove page from stack
 	} else {	// C1, move buffer to top of stack
-		if (StrategyControl->head != NULL) { // if head already exists
-			if (StrategyControl->tail->buf_id == buf_id) { 	// if curr is tail
+		if (StrategyControl->head != -1) { // if head already exists
+			if (StrategyControl->tail == buf_id) { 	// if curr is tail
 				StrategyControl->tail = curr->prev; 	// point to prev buffer
-				curr->prev->next = NULL; 	// remove reference to curr pointer
-			} else if (StrategyControl->head->buf_id == buf_id) { // if curr is head
+				lruStack[curr->prev]->next = -1; 	// remove reference to curr pointer
+			} else if (StrategyControl->head == buf_id) { // if curr is head
 				// do nothing
 			} else {
-				curr->prev->next = curr->next; 
-				curr->next->prev = curr->prev;
+				lruStack[curr->prev]->next = lruStack[curr]->next; 
+				lruStack[curr->next]->prev = lruStack[curr]->prev;
 			}
-			StrategyControl->head->prev = curr; // set prev head to point at curr
-			curr->next = StrategyControl->head; // set curr to point at prev head
+			lruStack[StrategyControl->head]->prev = buf_id; // set prev head to point at curr
+			lruStack[curr]->next = StrategyControl->head; // set curr to point at prev head
 		} else {
-			curr->next = NULL;
-			StrategyControl->tail = curr;
+			lruStack[curr]->next = -1;
+			StrategyControl->tail = buf_id;
 		} 
-		curr->prev = NULL;
-		StrategyControl->head = curr;
+		lruStack[curr]->prev = -1;
+		StrategyControl->head = buf_id;
 	}
 }
 
@@ -375,7 +375,7 @@ StrategyGetBuffer(BufferAccessStrategy strategy, uint32 *buf_state)
 	}
 
 	/* CS3223 Nothing on the freelist, so run the LRU algorithm */
-	int curr_buf = (StrategyControl->tail != NULL) ? StrategyControl->tail->buf_id : -1;
+	int curr_buf = StrategyControl->tail;
 
 	while (curr_buf >= 0 && curr_buf < NBuffers) {
 		/*
@@ -396,7 +396,7 @@ StrategyGetBuffer(BufferAccessStrategy strategy, uint32 *buf_state)
 			return buf;
 		}
 		UnlockBufHdr(buf, local_buf_state);
-		curr_buf = lruStack[curr_buf].prev->buf_id;
+		curr_buf = lruStack[curr_buf]->prev;
 	}
 
 	return NULL;
@@ -585,8 +585,8 @@ StrategyInitialize(bool init)
 		Assert(init);
 		StackBuffer *sb = lruStack;
 		for (int i = 0; i < NBuffers; i++) {
-			sb->prev = NULL;
-			sb->next = NULL;
+			sb->prev = -1;
+			sb->next = -1;
 			sb->buf_id = i;
 			sb++;
 		}
