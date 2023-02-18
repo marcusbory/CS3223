@@ -337,6 +337,7 @@ StrategyGetBuffer(BufferAccessStrategy strategy, uint32 *buf_state)
 		}
 		if (StrategyControl->head == curr_buf) {
 			elog(ERROR, "no unpinned buffers available");
+			UnlockBufHdr(buf, local_buf_state);
 			return NULL;
 		}
 		UnlockBufHdr(buf, local_buf_state);
