@@ -346,14 +346,14 @@ StrategyGetBuffer(BufferAccessStrategy strategy, uint32 *buf_state)
 	{
 		while (true)
 		{
-			/* Acquire the spinlock to remove element from the freelist */
-			SpinLockAcquire(&StrategyControl->buffer_strategy_lock);
+			// /* Acquire the spinlock to remove element from the freelist */
+			// SpinLockAcquire(&StrategyControl->buffer_strategy_lock);
 
-			if (StrategyControl->firstFreeBuffer < 0)
-			{
-				SpinLockRelease(&StrategyControl->buffer_strategy_lock);
-				break;
-			}
+			// if (StrategyControl->firstFreeBuffer < 0)
+			// {
+			// 	SpinLockRelease(&StrategyControl->buffer_strategy_lock);
+			// 	break;
+			// }
 
 			buf = GetBufferDescriptor(StrategyControl->firstFreeBuffer);
 			Assert(buf->freeNext != FREENEXT_NOT_IN_LIST);
@@ -366,7 +366,7 @@ StrategyGetBuffer(BufferAccessStrategy strategy, uint32 *buf_state)
 			 * Release the lock so someone else can access the freelist while
 			 * we check out this buffer.
 			 */
-			SpinLockRelease(&StrategyControl->buffer_strategy_lock);
+			// SpinLockRelease(&StrategyControl->buffer_strategy_lock);
 
 			/*
 			 * If the buffer is pinned or has a nonzero usage_count, we cannot
