@@ -122,71 +122,6 @@ static void AddBufferToRing(BufferAccessStrategy strategy,
 							BufferDesc *buf);
 
 /*
- * ClockSweepTick - Helper routine for StrategyGetBuffer()
- *
- * Move the clock hand one buffer ahead of its current position and return the
- * id of the buffer now under the hand.
- */
-static inline uint32
-ClockSweepTick(void)
-{
-	uint32		victim;
-
-	/*
-	 * Atomically move hand ahead one buffer - if there's several processes
-	 * doing this, this can lead to buffers being returned slightly out of
-	 * apparent order.
-	 */
-	victim =
-		pg_atomic_fetch_add_u32(&StrategyControl->nextVictimBuffer, 1);
-
-	if (victim >= NBuffers)
-	{
-		uint32		originalVictim = victim;
-
-		/* always wrap what we look up in BufferDescriptors */
-		victim = victim % NBuffers;
-
-		/*
-		 * If we're the one that just caused a wraparound, force
-		 * completePasses to be incremented while holding the spinlock. We
-		 * need the spinlock so StrategySyncStart() can return a consistent
-		 * value consisting of nextVictimBuffer and completePasses.
-		 */
-		if (victim == 0)
-		{
-			uint32		expected;
-			uint32		wrapped;
-			bool		success = false;
-
-			expected = originalVictim + 1;
-
-			while (!success)
-			{
-				/*
-				 * Acquire the spinlock while increasing completePasses. That
-				 * allows other readers to read nextVictimBuffer and
-				 * completePasses in a consistent manner which is required for
-				 * StrategySyncStart().  In theory delaying the increment
-				 * could lead to an overflow of nextVictimBuffers, but that's
-				 * highly unlikely and wouldn't be particularly harmful.
-				 */
-				SpinLockAcquire(&StrategyControl->buffer_strategy_lock);
-
-				wrapped = expected % NBuffers;
-
-				success = pg_atomic_compare_exchange_u32(&StrategyControl->nextVictimBuffer,
-														 &expected, wrapped);
-				if (success)
-					StrategyControl->completePasses++;
-				SpinLockRelease(&StrategyControl->buffer_strategy_lock);
-			}
-		}
-	}
-	return victim;
-}
-
-/*
  * have_free_buffer -- a lockless check to see if there is a free buffer in
  *					   buffer pool.
  *
@@ -212,6 +147,7 @@ void
 StrategyUpdateAccessedBuffer(int buf_id, bool delete)
 {
 	// elog(ERROR, "StrategyUpdateAccessedBuffer: Not implemented!");
+	SpinLockAcquire(&StrategyControl->buffer_strategy_lock);
 	StackBuffer* curr = &lruStack[buf_id];
 	if (delete) {												// C4, remove buffer from stack
 		if (StrategyControl->head == buf_id) { 					// if is head
@@ -239,7 +175,7 @@ StrategyUpdateAccessedBuffer(int buf_id, bool delete)
 		} else {												// in list
 			if (StrategyControl->head == buf_id) { 				// if curr is head
 				// do nothing
-				return;
+				break;
 			} else if (StrategyControl->tail == buf_id) {		// if curr is tail
 				lruStack[curr->prev].next = END_OF_LIST;		// prev pointer point to end
 				StrategyControl->tail = lruStack[curr->prev].buf_id; // tail point to prev pointer
@@ -257,8 +193,8 @@ StrategyUpdateAccessedBuffer(int buf_id, bool delete)
 
 			}
 		}
-		
 	}
+	SpinLockRelease(&StrategyControl->buffer_strategy_lock);
 }
 
 
