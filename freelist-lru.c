@@ -144,7 +144,7 @@ have_free_buffer(void)
 void
 StrategyUpdateAccessedBuffer(int buf_id, bool delete)
 {
-	StackBuffer* curr = StrategyControl->lruStack[buf_id];
+	StackBuffer* curr = &StrategyControl->lruStack[buf_id];
 	if (delete) {												// C4, remove buffer from stack
 		if (StrategyControl->head == buf_id) { 					// if is head
 			StrategyControl->head = curr->next;					// point to next buffer
