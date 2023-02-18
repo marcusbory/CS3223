@@ -59,7 +59,7 @@ typedef struct
 	int head;
 	int tail;
 
-	StackBuffer* lruStack = NULL;
+	StackBuffer* lruStack;
 
 	/*
 	 * Statistics.  These counters should be wide enough that they can't
