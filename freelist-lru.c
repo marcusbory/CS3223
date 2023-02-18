@@ -53,7 +53,8 @@ typedef struct
 	/* cs3223 head and tail pointers */
 	int head;
 	int tail;
-
+	StackBuffer* lruStack = NULL;
+	
 	/*
 	 * Statistics.  These counters should be wide enough that they can't
 	 * overflow during a single bgwriter cycle.
@@ -111,7 +112,6 @@ struct StackBuffer
 	int next;
 	int prev;
 };
-static StackBuffer* lruStack = NULL;
 
 void StrategyUpdateAccessedBuffer(int buf_id, bool delete);
 
