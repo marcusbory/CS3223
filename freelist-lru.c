@@ -175,7 +175,8 @@ StrategyUpdateAccessedBuffer(int buf_id, bool delete)
 		} else {												// in list
 			if (StrategyControl->head == buf_id) { 				// if curr is head
 				// do nothing
-				break;
+				SpinLockRelease(&StrategyControl->buffer_strategy_lock);
+				return;
 			} else if (StrategyControl->tail == buf_id) {		// if curr is tail
 				lruStack[curr->prev].next = END_OF_LIST;		// prev pointer point to end
 				StrategyControl->tail = lruStack[curr->prev].buf_id; // tail point to prev pointer
@@ -190,11 +191,9 @@ StrategyUpdateAccessedBuffer(int buf_id, bool delete)
 				curr->next = StrategyControl->head;				// curr next point to head
 				curr->prev = END_OF_LIST;						// curr prev point to end
 				StrategyControl->head = buf_id;					// head point to curr
-
 			}
 		}
 	}
-	SpinLockRelease(&StrategyControl->buffer_strategy_lock);
 }
 
 
