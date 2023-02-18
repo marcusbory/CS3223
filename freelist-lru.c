@@ -404,7 +404,7 @@ StrategyGetBuffer(BufferAccessStrategy strategy, uint32 *buf_state)
 			StrategyUpdateAccessedBuffer(buf->buf_id, false);
 			return buf;
 		}
-		if (buf->buf_id == OUT_OF_LIST) {
+		if (StrategyControl->head == curr_buf) {
 			elog(ERROR, "no unpinned buffers available");
 			return NULL;
 		}
