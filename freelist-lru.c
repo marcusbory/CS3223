@@ -161,6 +161,7 @@ StrategyUpdateAccessedBuffer(int buf_id, bool delete)
 		curr->next = OUT_OF_LIST;	
 		curr->prev = OUT_OF_LIST;								// remove page from stack
 	} else {													// C1, move buffer to top of stack
+		SpinLockAcquire(&StrategyControl->buffer_strategy_lock);
 		if (curr->next == OUT_OF_LIST && curr->prev == OUT_OF_LIST) {				// not in list
 			curr->next = StrategyControl->head;
 			curr->prev = END_OF_LIST;
@@ -190,6 +191,7 @@ StrategyUpdateAccessedBuffer(int buf_id, bool delete)
 				StrategyControl->head = buf_id;					// head point to curr
 			}
 		}
+		SpinLockRelease(&StrategyControl->buffer_strategy_lock);
 	}
 }
 
