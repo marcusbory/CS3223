@@ -171,7 +171,7 @@ StrategyUpdateAccessedBuffer(int buf_id, bool delete)
 			StrategyControl->head = buf_id;
 		} else {												// in list
 			if (StrategyControl->head == buf_id) { 				// if curr is head
-				// do nothing
+				SpinLockRelease(&StrategyControl->buffer_strategy_lock);
 				return;
 			} else if (StrategyControl->tail == buf_id) {		// if curr is tail
 				StrategyControl->lruStack[curr->prev].next = END_OF_LIST;		// prev pointer point to end
