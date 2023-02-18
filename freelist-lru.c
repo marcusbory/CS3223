@@ -21,8 +21,8 @@
 #include "storage/proc.h"
 
 #define INT_ACCESS_ONCE(var)	((int)(*((volatile int *)&(var))))
-#define END_OF_LIST(-1)
-#define OUT_OF_LIST(-2)
+#define END_OF_LIST	-1
+#define OUT_OF_LIST	-2
 
 /* cs3223*/
 typedef struct StackBuffer StackBuffer;
