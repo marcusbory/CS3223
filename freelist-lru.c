@@ -325,7 +325,9 @@ StrategyGetBuffer(BufferAccessStrategy strategy, uint32 *buf_state)
 	int curr_buf = StrategyControl->tail;
 
 	for (;;) {
+		SpinLockAcquire(&StrategyControl->buffer_strategy_lock);
 		buf = GetBufferDescriptor(curr_buf);
+		SpinLockRelease(&StrategyControl->buffer_strategy_lock);
 		local_buf_state = LockBufHdr(buf);
 		if (BUF_STATE_GET_REFCOUNT(local_buf_state) == 0)
 		{
