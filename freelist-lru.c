@@ -194,6 +194,7 @@ StrategyUpdateAccessedBuffer(int buf_id, bool delete)
 			}
 		}
 	}
+	SpinLockRelease(&StrategyControl->buffer_strategy_lock);
 }
 
 
