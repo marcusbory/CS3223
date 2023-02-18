@@ -25,12 +25,12 @@
 #define OUT_OF_LIST	-2
 
 /* cs3223 */
-struct StackBuffer
+typedef struct StackBuffer
 {
 	int buf_id;
 	int next;
 	int prev;
-};
+} StackBuffer;
 
 /*
  * The shared freelist control information.
