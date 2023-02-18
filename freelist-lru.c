@@ -24,8 +24,13 @@
 #define END_OF_LIST	-1
 #define OUT_OF_LIST	-2
 
-/* cs3223*/
-typedef struct StackBuffer StackBuffer;
+/* cs3223 */
+struct StackBuffer
+{
+	int buf_id;
+	int next;
+	int prev;
+};
 
 /*
  * The shared freelist control information.
@@ -53,6 +58,8 @@ typedef struct
 	/* cs3223 head and tail pointers */
 	int head;
 	int tail;
+
+	StackBuffer* lruStack = NULL;
 
 	/*
 	 * Statistics.  These counters should be wide enough that they can't
@@ -104,15 +111,6 @@ typedef struct BufferAccessStrategyData
 	Buffer		buffers[FLEXIBLE_ARRAY_MEMBER];
 }			BufferAccessStrategyData;
 
-/* cs3223 */
-struct StackBuffer
-{
-	int buf_id;
-	int next;
-	int prev;
-};
-static StackBuffer* lruStack = NULL;
-
 void StrategyUpdateAccessedBuffer(int buf_id, bool delete);
 
 /* Prototypes for internal functions */
@@ -146,29 +144,28 @@ have_free_buffer(void)
 void
 StrategyUpdateAccessedBuffer(int buf_id, bool delete)
 {
-	StackBuffer* curr = &lruStack[buf_id];
+	StackBuffer* curr = StrategyControl->lruStack[buf_id];
 	if (delete) {												// C4, remove buffer from stack
 		if (StrategyControl->head == buf_id) { 					// if is head
 			StrategyControl->head = curr->next;					// point to next buffer
-			lruStack[curr->next].prev = END_OF_LIST;			// remove reference to curr pointer
+			StrategyControl->lruStack[curr->next].prev = END_OF_LIST;			// remove reference to curr pointer
 		} else if (StrategyControl->tail == buf_id) { 			// if is tail
 			StrategyControl->tail = curr->prev; 				// point to prev buffer
-			lruStack[curr->prev].next = END_OF_LIST;			// remove reference to curr pointer
+			StrategyControl->lruStack[curr->prev].next = END_OF_LIST;			// remove reference to curr pointer
 		} else {
-			lruStack[curr->prev].next = curr->next;
-			lruStack[curr->next].prev = curr->prev;
+			StrategyControl->lruStack[curr->prev].next = curr->next;
+			StrategyControl->lruStack[curr->next].prev = curr->prev;
 		}
 		curr->next = OUT_OF_LIST;	
 		curr->prev = OUT_OF_LIST;								// remove page from stack
 	} else {													// C1, move buffer to top of stack
-		// SpinLockAcquire(&StrategyControl->buffer_strategy_lock);
 		if (curr->next == OUT_OF_LIST && curr->prev == OUT_OF_LIST) {				// not in list
 			curr->next = StrategyControl->head;
 			curr->prev = END_OF_LIST;
 			if (StrategyControl->head == -1) {					// no head (empty list)
 				StrategyControl->tail = buf_id;
 			} else {
-				lruStack[StrategyControl->head].prev = buf_id;
+				StrategyControl->lruStack[StrategyControl->head].prev = buf_id;
 			}
 			StrategyControl->head = buf_id;
 		} else {												// in list
@@ -176,22 +173,21 @@ StrategyUpdateAccessedBuffer(int buf_id, bool delete)
 				// do nothing
 				return;
 			} else if (StrategyControl->tail == buf_id) {		// if curr is tail
-				lruStack[curr->prev].next = END_OF_LIST;		// prev pointer point to end
-				StrategyControl->tail = lruStack[curr->prev].buf_id; // tail point to prev pointer
-				lruStack[StrategyControl->head].prev = buf_id;	// head prev point to curr
+				StrategyControl->lruStack[curr->prev].next = END_OF_LIST;		// prev pointer point to end
+				StrategyControl->tail = StrategyControl->lruStack[curr->prev].buf_id; // tail point to prev pointer
+				StrategyControl->lruStack[StrategyControl->head].prev = buf_id;	// head prev point to curr
 				curr->next = StrategyControl->head;				// curr next point to head
 				curr->prev = END_OF_LIST;						// curr prev point to end
 				StrategyControl->head = buf_id;					// head point to curr
 			} else {
-				lruStack[curr->prev].next = curr->next;			
-				lruStack[curr->next].prev = curr->prev;
-				lruStack[StrategyControl->head].prev = buf_id;	// head prev point to curr
+				StrategyControl->lruStack[curr->prev].next = curr->next;			
+				StrategyControl->lruStack[curr->next].prev = curr->prev;
+				StrategyControl->lruStack[StrategyControl->head].prev = buf_id;	// head prev point to curr
 				curr->next = StrategyControl->head;				// curr next point to head
 				curr->prev = END_OF_LIST;						// curr prev point to end
 				StrategyControl->head = buf_id;					// head point to curr
 			}
 		}
-		// SpinLockRelease(&StrategyControl->buffer_strategy_lock);
 	}
 }
 
@@ -345,7 +341,7 @@ StrategyGetBuffer(BufferAccessStrategy strategy, uint32 *buf_state)
 			return NULL;
 		}
 		UnlockBufHdr(buf, local_buf_state);
-		curr_buf = lruStack[curr_buf].prev;
+		curr_buf = StrategyControl->lruStack[curr_buf].prev;
 	}
 }
 
@@ -529,13 +525,13 @@ StrategyInitialize(bool init)
 	else
 		Assert(!init);
 
-	lruStack = (StackBuffer*) ShmemInitStruct("LRU Stack", NBuffers * sizeof(StackBuffer), &stackFound);
+	StrategyControl->lruStack = (StackBuffer*) ShmemInitStruct("LRU Stack", NBuffers * sizeof(StackBuffer), &stackFound);
 	if (!stackFound) {
 		Assert(init);
 		for (int i = 0; i < NBuffers; i++) {
-			lruStack[i].prev = OUT_OF_LIST;
-			lruStack[i].next = OUT_OF_LIST;
-			lruStack[i].buf_id = i;
+			StrategyControl->lruStack[i].prev = OUT_OF_LIST;
+			StrategyControl->lruStack[i].next = OUT_OF_LIST;
+			StrategyControl->lruStack[i].buf_id = i;
 		}
 	}
 	else
