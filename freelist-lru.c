@@ -146,8 +146,6 @@ have_free_buffer(void)
 void
 StrategyUpdateAccessedBuffer(int buf_id, bool delete)
 {
-	// elog(ERROR, "StrategyUpdateAccessedBuffer: Not implemented!");
-	SpinLockAcquire(&StrategyControl->buffer_strategy_lock);
 	StackBuffer* curr = &lruStack[buf_id];
 	if (delete) {												// C4, remove buffer from stack
 		if (StrategyControl->head == buf_id) { 					// if is head
@@ -175,7 +173,6 @@ StrategyUpdateAccessedBuffer(int buf_id, bool delete)
 		} else {												// in list
 			if (StrategyControl->head == buf_id) { 				// if curr is head
 				// do nothing
-				SpinLockRelease(&StrategyControl->buffer_strategy_lock);
 				return;
 			} else if (StrategyControl->tail == buf_id) {		// if curr is tail
 				lruStack[curr->prev].next = END_OF_LIST;		// prev pointer point to end
@@ -194,7 +191,6 @@ StrategyUpdateAccessedBuffer(int buf_id, bool delete)
 			}
 		}
 	}
-	SpinLockRelease(&StrategyControl->buffer_strategy_lock);
 }
 
 
