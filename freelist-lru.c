@@ -176,7 +176,7 @@ void MoveBufferToHead(int buf_id)
 
 	// 2. If buffer is at lru stack bottom:
 	// - change bottom->prev's pointer to END_OF_STACK
-	// - change top's next pointer to bottom node
+	// - change oldBottom's next pointer to oldTop node
 	// - change lruStackBottom
 	// - change lruStacktop
 	if (StrategyControl->lruStackBottom == buf_id) {
