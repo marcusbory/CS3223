@@ -996,3 +996,43 @@
 2023-02-19 15:12:26.889 +08 [52596] LOG:  checkpoint complete: wrote 49 buffers (0.6%); 0 WAL file(s) added, 0 removed, 4 recycled; write=0.003 s, sync=0.035 s, total=0.046 s; sync files=41, longest=0.015 s, average=0.001 s; distance=69738 kB, estimate=69738 kB
 2023-02-19 15:17:26.120 +08 [52596] LOG:  checkpoint starting: time
 2023-02-19 15:17:26.340 +08 [52596] LOG:  checkpoint complete: wrote 46 buffers (0.6%); 0 WAL file(s) added, 0 removed, 1 recycled; write=0.203 s, sync=0.013 s, total=0.221 s; sync files=14, longest=0.011 s, average=0.001 s; distance=14284 kB, estimate=64192 kB
+2023-02-19 15:34:05.124 +08 [2979599] LOG:  starting PostgreSQL 15.0 on x86_64-pc-linux-gnu, compiled by gcc (Ubuntu 9.4.0-1ubuntu1~20.04.1) 9.4.0, 64-bit
+2023-02-19 15:34:05.125 +08 [2979599] LOG:  listening on IPv4 address "127.0.0.1", port 5024
+2023-02-19 15:34:05.136 +08 [2979599] LOG:  listening on Unix socket "/tmp/.s.PGSQL.5024"
+2023-02-19 15:34:05.605 +08 [2979604] LOG:  database system was shut down at 2023-02-14 20:02:14 +08
+2023-02-19 15:34:06.024 +08 [2979599] LOG:  database system is ready to accept connections
+2023-02-19 15:34:44.212 +08 [2979599] LOG:  received fast shutdown request
+2023-02-19 15:34:44.223 +08 [2979599] LOG:  aborting any active transactions
+2023-02-19 15:34:44.245 +08 [2979599] LOG:  background worker "logical replication launcher" (PID 2979607) exited with exit code 1
+2023-02-19 15:34:44.245 +08 [2979602] LOG:  shutting down
+2023-02-19 15:34:44.266 +08 [2979602] LOG:  checkpoint starting: shutdown immediate
+2023-02-19 15:34:44.440 +08 [2979602] LOG:  checkpoint complete: wrote 3 buffers (18.8%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.037 s, sync=0.001 s, total=0.195 s; sync files=3, longest=0.001 s, average=0.001 s; distance=0 kB, estimate=0 kB
+2023-02-19 15:34:44.530 +08 [2979599] LOG:  database system is shut down
+2023-02-19 15:34:50.922 +08 [2979671] LOG:  starting PostgreSQL 15.0 on x86_64-pc-linux-gnu, compiled by gcc (Ubuntu 9.4.0-1ubuntu1~20.04.1) 9.4.0, 64-bit
+2023-02-19 15:34:50.922 +08 [2979671] LOG:  listening on IPv4 address "127.0.0.1", port 5024
+2023-02-19 15:34:50.935 +08 [2979671] LOG:  listening on Unix socket "/tmp/.s.PGSQL.5024"
+2023-02-19 15:34:50.988 +08 [2979674] LOG:  database system was shut down at 2023-02-19 15:34:44 +08
+2023-02-19 15:34:51.121 +08 [2979671] LOG:  database system is ready to accept connections
+2023-02-19 15:35:36.399 +08 [2979719] ERROR:  no unpinned buffers available
+2023-02-19 15:35:36.399 +08 [2979719] STATEMENT:  UPDATE pgbench_accounts SET abalance = abalance + -4771 WHERE aid = 30977;
+2023-02-19 15:35:51.255 +08 [2979721] ERROR:  no unpinned buffers available
+2023-02-19 15:35:51.255 +08 [2979721] STATEMENT:  INSERT INTO pgbench_history (tid, bid, aid, delta, mtime) VALUES (32, 3, 394457, -1624, CURRENT_TIMESTAMP);
+2023-02-19 15:38:21.730 +08 [2979724] ERROR:  no unpinned buffers available
+2023-02-19 15:38:21.730 +08 [2979724] STATEMENT:  UPDATE pgbench_accounts SET abalance = abalance + -2532 WHERE aid = 391989;
+2023-02-19 15:38:41.289 +08 [2979725] ERROR:  no unpinned buffers available
+2023-02-19 15:38:41.289 +08 [2979725] STATEMENT:  UPDATE pgbench_accounts SET abalance = abalance + -2515 WHERE aid = 344306;
+2023-02-19 15:38:42.316 +08 [2979720] ERROR:  no unpinned buffers available
+2023-02-19 15:38:42.316 +08 [2979720] STATEMENT:  INSERT INTO pgbench_history (tid, bid, aid, delta, mtime) VALUES (40, 2, 217777, 1018, CURRENT_TIMESTAMP);
+2023-02-19 15:39:50.796 +08 [2979672] LOG:  checkpoint starting: time
+2023-02-19 15:39:55.171 +08 [2979672] LOG:  checkpoint complete: wrote 48 buffers (0.6%); 0 WAL file(s) added, 0 removed, 7 recycled; write=0.180 s, sync=2.912 s, total=4.376 s; sync files=45, longest=0.872 s, average=0.065 s; distance=109910 kB, estimate=109910 kB
+2023-02-19 15:39:57.209 +08 [2979717] ERROR:  no unpinned buffers available
+2023-02-19 15:39:57.209 +08 [2979717] STATEMENT:  UPDATE pgbench_accounts SET abalance = abalance + 3896 WHERE aid = 328527;
+2023-02-19 15:40:05.144 +08 [2979718] ERROR:  no unpinned buffers available
+2023-02-19 15:40:05.144 +08 [2979718] STATEMENT:  UPDATE pgbench_accounts SET abalance = abalance + 3392 WHERE aid = 122944;
+2023-02-19 15:42:50.186 +08 [2979671] LOG:  received fast shutdown request
+2023-02-19 15:42:50.193 +08 [2979671] LOG:  aborting any active transactions
+2023-02-19 15:42:50.208 +08 [2979671] LOG:  background worker "logical replication launcher" (PID 2979677) exited with exit code 1
+2023-02-19 15:42:50.208 +08 [2979672] LOG:  shutting down
+2023-02-19 15:42:50.219 +08 [2979672] LOG:  checkpoint starting: shutdown immediate
+2023-02-19 15:42:51.427 +08 [2979672] LOG:  checkpoint complete: wrote 7953 buffers (97.1%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.970 s, sync=0.036 s, total=1.220 s; sync files=17, longest=0.036 s, average=0.003 s; distance=14084 kB, estimate=100328 kB
+2023-02-19 15:42:51.601 +08 [2979671] LOG:  database system is shut down
