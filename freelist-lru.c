@@ -335,6 +335,7 @@ StrategyUpdateAccessedBuffer(int buf_id, bool delete)
 	}
 	else 
 	{
+		SpinLockAcquire(&StrategyControl->buffer_strategy_lock);
 		// If buffer is not in list, add it (Case 2)
 		BufferPage *bp = &LruStack[buf_id];
 		bool isBufferInStack = (bp->next == POINT_TO_NULL && bp->prev == POINT_TO_NULL);
@@ -347,6 +348,7 @@ StrategyUpdateAccessedBuffer(int buf_id, bool delete)
 		{
 			MoveBufferToHead(buf_id);
 		}
+		SpinLockRelease(&StrategyControl->buffer_strategy_lock);
 	}
 	// elog(ERROR, "StrategyUpdateAccessedBuffer: Not implemented!");
 }

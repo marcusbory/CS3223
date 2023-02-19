@@ -569,3 +569,200 @@
 2023-02-19 13:29:37.478 +08 [27865] LOG:  listening on Unix socket "/tmp/.s.PGSQL.5024"
 2023-02-19 13:29:37.480 +08 [27868] LOG:  database system was shut down at 2023-02-19 13:29:35 +08
 2023-02-19 13:29:37.483 +08 [27865] LOG:  database system is ready to accept connections
+2023-02-19 13:32:27.698 +08 [27865] LOG:  received fast shutdown request
+2023-02-19 13:32:27.705 +08 [27865] LOG:  aborting any active transactions
+2023-02-19 13:32:27.706 +08 [27865] LOG:  background worker "logical replication launcher" (PID 27871) exited with exit code 1
+2023-02-19 13:32:27.706 +08 [27866] LOG:  shutting down
+2023-02-19 13:32:27.707 +08 [27866] LOG:  checkpoint starting: shutdown immediate
+2023-02-19 13:32:27.712 +08 [27866] LOG:  checkpoint complete: wrote 3 buffers (18.8%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.002 s, sync=0.001 s, total=0.007 s; sync files=3, longest=0.001 s, average=0.001 s; distance=0 kB, estimate=0 kB
+2023-02-19 13:32:27.714 +08 [27865] LOG:  database system is shut down
+2023-02-19 13:32:31.020 +08 [29156] LOG:  starting PostgreSQL 15.0 on x86_64-pc-linux-gnu, compiled by gcc (Ubuntu 11.3.0-1ubuntu1~22.04) 11.3.0, 64-bit
+2023-02-19 13:32:31.020 +08 [29156] LOG:  listening on IPv4 address "127.0.0.1", port 5024
+2023-02-19 13:32:31.022 +08 [29156] LOG:  listening on Unix socket "/tmp/.s.PGSQL.5024"
+2023-02-19 13:32:31.024 +08 [29159] LOG:  database system was shut down at 2023-02-19 13:32:27 +08
+2023-02-19 13:32:31.027 +08 [29156] LOG:  database system is ready to accept connections
+2023-02-19 13:32:40.293 +08 [29194] ERROR:  no unpinned buffers available
+2023-02-19 13:32:40.293 +08 [29194] STATEMENT:  SELECT abalance FROM pgbench_accounts WHERE aid = 284666;
+2023-02-19 13:37:31.581 +08 [29157] LOG:  checkpoint starting: time
+2023-02-19 13:37:34.116 +08 [29157] LOG:  checkpoint complete: wrote 50 buffers (0.6%); 0 WAL file(s) added, 0 removed, 0 recycled; write=2.507 s, sync=0.015 s, total=2.536 s; sync files=39, longest=0.012 s, average=0.001 s; distance=1933 kB, estimate=1933 kB
+2023-02-19 13:45:35.594 +08 [29156] LOG:  received fast shutdown request
+2023-02-19 13:45:35.595 +08 [29156] LOG:  aborting any active transactions
+2023-02-19 13:45:35.595 +08 [29193] FATAL:  terminating connection due to administrator command
+2023-02-19 13:45:35.595 +08 [29193] STATEMENT:  UPDATE pgbench_branches SET bbalance = bbalance + 4684 WHERE bid = 1;
+2023-02-19 13:45:35.595 +08 [29199] FATAL:  terminating connection due to administrator command
+2023-02-19 13:45:35.595 +08 [29199] CONTEXT:  while updating tuple (6,191) in relation "pgbench_branches"
+2023-02-19 13:45:35.595 +08 [29199] STATEMENT:  UPDATE pgbench_branches SET bbalance = bbalance + 3266 WHERE bid = 1;
+2023-02-19 13:45:35.595 +08 [29196] FATAL:  terminating connection due to administrator command
+2023-02-19 13:45:35.595 +08 [29196] CONTEXT:  while rechecking updated tuple (6,191) in relation "pgbench_branches"
+2023-02-19 13:45:35.595 +08 [29196] STATEMENT:  UPDATE pgbench_branches SET bbalance = bbalance + -3997 WHERE bid = 1;
+2023-02-19 13:45:35.595 +08 [29198] FATAL:  terminating connection due to administrator command
+2023-02-19 13:45:35.595 +08 [29198] STATEMENT:  UPDATE pgbench_branches SET bbalance = bbalance + 3590 WHERE bid = 1;
+2023-02-19 13:45:35.595 +08 [29195] FATAL:  terminating connection due to administrator command
+2023-02-19 13:45:35.595 +08 [29195] CONTEXT:  while updating tuple (0,45) in relation "pgbench_tellers"
+2023-02-19 13:45:35.595 +08 [29195] STATEMENT:  UPDATE pgbench_tellers SET tbalance = tbalance + 3818 WHERE tid = 34;
+2023-02-19 13:45:35.595 +08 [29197] FATAL:  terminating connection due to administrator command
+2023-02-19 13:45:35.595 +08 [29197] CONTEXT:  while rechecking updated tuple (6,191) in relation "pgbench_branches"
+2023-02-19 13:45:35.595 +08 [29197] STATEMENT:  UPDATE pgbench_branches SET bbalance = bbalance + -4169 WHERE bid = 1;
+2023-02-19 13:45:35.595 +08 [29199] LOG:  could not send data to client: Broken pipe
+2023-02-19 13:45:35.595 +08 [29199] CONTEXT:  while updating tuple (6,191) in relation "pgbench_branches"
+2023-02-19 13:45:35.595 +08 [29199] STATEMENT:  UPDATE pgbench_branches SET bbalance = bbalance + 3266 WHERE bid = 1;
+2023-02-19 13:45:35.595 +08 [29193] LOG:  could not send data to client: Broken pipe
+2023-02-19 13:45:35.595 +08 [29193] STATEMENT:  UPDATE pgbench_branches SET bbalance = bbalance + 4684 WHERE bid = 1;
+2023-02-19 13:45:35.595 +08 [29196] LOG:  could not send data to client: Broken pipe
+2023-02-19 13:45:35.595 +08 [29196] CONTEXT:  while rechecking updated tuple (6,191) in relation "pgbench_branches"
+2023-02-19 13:45:35.595 +08 [29196] STATEMENT:  UPDATE pgbench_branches SET bbalance = bbalance + -3997 WHERE bid = 1;
+2023-02-19 13:45:35.595 +08 [29198] LOG:  could not send data to client: Broken pipe
+2023-02-19 13:45:35.595 +08 [29198] STATEMENT:  UPDATE pgbench_branches SET bbalance = bbalance + 3590 WHERE bid = 1;
+2023-02-19 13:45:35.595 +08 [29197] LOG:  could not send data to client: Broken pipe
+2023-02-19 13:45:35.595 +08 [29197] CONTEXT:  while rechecking updated tuple (6,191) in relation "pgbench_branches"
+2023-02-19 13:45:35.595 +08 [29197] STATEMENT:  UPDATE pgbench_branches SET bbalance = bbalance + -4169 WHERE bid = 1;
+2023-02-19 13:45:35.595 +08 [29195] LOG:  could not send data to client: Broken pipe
+2023-02-19 13:45:35.595 +08 [29195] CONTEXT:  while updating tuple (0,45) in relation "pgbench_tellers"
+2023-02-19 13:45:35.595 +08 [29195] STATEMENT:  UPDATE pgbench_tellers SET tbalance = tbalance + 3818 WHERE tid = 34;
+2023-02-19 13:45:35.595 +08 [29156] LOG:  background worker "logical replication launcher" (PID 29162) exited with exit code 1
+2023-02-19 13:45:35.595 +08 [29192] FATAL:  terminating connection due to administrator command
+2023-02-19 13:45:35.595 +08 [29192] CONTEXT:  while updating tuple (0,64) in relation "pgbench_tellers"
+2023-02-19 13:45:35.595 +08 [29192] STATEMENT:  UPDATE pgbench_tellers SET tbalance = tbalance + -2741 WHERE tid = 36;
+2023-02-19 13:45:35.595 +08 [29192] LOG:  could not send data to client: Broken pipe
+2023-02-19 13:45:35.595 +08 [29192] CONTEXT:  while updating tuple (0,64) in relation "pgbench_tellers"
+2023-02-19 13:45:35.595 +08 [29192] STATEMENT:  UPDATE pgbench_tellers SET tbalance = tbalance + -2741 WHERE tid = 36;
+2023-02-19 13:46:25.706 +08 [29156] LOG:  received immediate shutdown request
+2023-02-19 13:46:25.717 +08 [29190] LOG:  could not send data to client: Broken pipe
+2023-02-19 13:46:25.717 +08 [29190] STATEMENT:  INSERT INTO pgbench_history (tid, bid, aid, delta, mtime) VALUES (2, 1, 370029, 4084, CURRENT_TIMESTAMP);
+2023-02-19 13:46:25.717 +08 [29191] LOG:  could not send data to client: Broken pipe
+2023-02-19 13:46:25.717 +08 [29191] STATEMENT:  UPDATE pgbench_accounts SET abalance = abalance + -1718 WHERE aid = 359176;
+2023-02-19 13:46:25.731 +08 [29156] LOG:  database system is shut down
+2023-02-19 13:46:30.556 +08 [30212] LOG:  starting PostgreSQL 15.0 on x86_64-pc-linux-gnu, compiled by gcc (Ubuntu 11.3.0-1ubuntu1~22.04) 11.3.0, 64-bit
+2023-02-19 13:46:30.556 +08 [30212] LOG:  listening on IPv4 address "127.0.0.1", port 5024
+2023-02-19 13:46:30.558 +08 [30212] LOG:  listening on Unix socket "/tmp/.s.PGSQL.5024"
+2023-02-19 13:46:30.562 +08 [30215] LOG:  database system was interrupted; last known up at 2023-02-19 13:37:34 +08
+2023-02-19 13:46:30.659 +08 [30215] LOG:  database system was not properly shut down; automatic recovery in progress
+2023-02-19 13:46:30.667 +08 [30215] LOG:  redo starts at 0/10E748E0
+2023-02-19 13:46:30.667 +08 [30215] LOG:  invalid record length at 0/10E74A08: wanted 24, got 0
+2023-02-19 13:46:30.667 +08 [30215] LOG:  redo done at 0/10E749B0 system usage: CPU: user: 0.00 s, system: 0.00 s, elapsed: 0.00 s
+2023-02-19 13:46:30.677 +08 [30213] LOG:  checkpoint starting: end-of-recovery immediate wait
+2023-02-19 13:46:30.682 +08 [30213] LOG:  checkpoint complete: wrote 3 buffers (18.8%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.002 s, sync=0.001 s, total=0.012 s; sync files=2, longest=0.001 s, average=0.001 s; distance=0 kB, estimate=0 kB
+2023-02-19 13:46:30.684 +08 [30212] LOG:  database system is ready to accept connections
+2023-02-19 13:47:30.507 +08 [30212] LOG:  received fast shutdown request
+2023-02-19 13:47:30.518 +08 [30212] LOG:  aborting any active transactions
+2023-02-19 13:47:30.519 +08 [30212] LOG:  background worker "logical replication launcher" (PID 30218) exited with exit code 1
+2023-02-19 13:47:30.519 +08 [30213] LOG:  shutting down
+2023-02-19 13:47:30.520 +08 [30213] LOG:  checkpoint starting: shutdown immediate
+2023-02-19 13:47:30.524 +08 [30213] LOG:  checkpoint complete: wrote 0 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.001 s, sync=0.001 s, total=0.005 s; sync files=2, longest=0.001 s, average=0.001 s; distance=3 kB, estimate=3 kB
+2023-02-19 13:47:30.526 +08 [30212] LOG:  database system is shut down
+2023-02-19 13:47:47.019 +08 [31341] LOG:  starting PostgreSQL 15.0 on x86_64-pc-linux-gnu, compiled by gcc (Ubuntu 11.3.0-1ubuntu1~22.04) 11.3.0, 64-bit
+2023-02-19 13:47:47.019 +08 [31341] LOG:  listening on IPv4 address "127.0.0.1", port 5024
+2023-02-19 13:47:47.021 +08 [31341] LOG:  listening on Unix socket "/tmp/.s.PGSQL.5024"
+2023-02-19 13:47:47.025 +08 [31344] LOG:  database system was shut down at 2023-02-19 13:47:30 +08
+2023-02-19 13:47:47.029 +08 [31341] LOG:  database system is ready to accept connections
+2023-02-19 13:47:56.723 +08 [31341] LOG:  received fast shutdown request
+2023-02-19 13:47:56.734 +08 [31341] LOG:  aborting any active transactions
+2023-02-19 13:47:56.735 +08 [31341] LOG:  background worker "logical replication launcher" (PID 31347) exited with exit code 1
+2023-02-19 13:47:56.735 +08 [31342] LOG:  shutting down
+2023-02-19 13:47:56.736 +08 [31342] LOG:  checkpoint starting: shutdown immediate
+2023-02-19 13:47:56.742 +08 [31342] LOG:  checkpoint complete: wrote 3 buffers (18.8%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.002 s, sync=0.001 s, total=0.007 s; sync files=2, longest=0.001 s, average=0.001 s; distance=0 kB, estimate=0 kB
+2023-02-19 13:47:56.744 +08 [31341] LOG:  database system is shut down
+2023-02-19 13:48:29.502 +08 [32469] LOG:  starting PostgreSQL 15.0 on x86_64-pc-linux-gnu, compiled by gcc (Ubuntu 11.3.0-1ubuntu1~22.04) 11.3.0, 64-bit
+2023-02-19 13:48:29.502 +08 [32469] LOG:  listening on IPv4 address "127.0.0.1", port 5024
+2023-02-19 13:48:29.507 +08 [32469] LOG:  listening on Unix socket "/tmp/.s.PGSQL.5024"
+2023-02-19 13:48:29.511 +08 [32472] LOG:  database system was shut down at 2023-02-19 13:47:56 +08
+2023-02-19 13:48:29.514 +08 [32469] LOG:  database system is ready to accept connections
+2023-02-19 13:48:45.651 +08 [32469] LOG:  received fast shutdown request
+2023-02-19 13:48:45.662 +08 [32469] LOG:  aborting any active transactions
+2023-02-19 13:48:45.663 +08 [32469] LOG:  background worker "logical replication launcher" (PID 32475) exited with exit code 1
+2023-02-19 13:48:45.663 +08 [32470] LOG:  shutting down
+2023-02-19 13:48:45.664 +08 [32470] LOG:  checkpoint starting: shutdown immediate
+2023-02-19 13:48:45.670 +08 [32470] LOG:  checkpoint complete: wrote 3 buffers (18.8%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.002 s, sync=0.001 s, total=0.007 s; sync files=2, longest=0.001 s, average=0.001 s; distance=0 kB, estimate=0 kB
+2023-02-19 13:48:45.672 +08 [32469] LOG:  database system is shut down
+2023-02-19 13:49:06.743 +08 [32554] LOG:  starting PostgreSQL 15.0 on x86_64-pc-linux-gnu, compiled by gcc (Ubuntu 11.3.0-1ubuntu1~22.04) 11.3.0, 64-bit
+2023-02-19 13:49:06.743 +08 [32554] LOG:  listening on IPv4 address "127.0.0.1", port 5024
+2023-02-19 13:49:06.745 +08 [32554] LOG:  listening on Unix socket "/tmp/.s.PGSQL.5024"
+2023-02-19 13:49:06.748 +08 [32557] LOG:  database system was shut down at 2023-02-19 13:48:45 +08
+2023-02-19 13:49:06.752 +08 [32554] LOG:  database system is ready to accept connections
+2023-02-19 13:49:19.677 +08 [32592] ERROR:  no unpinned buffers available
+2023-02-19 13:49:19.677 +08 [32592] STATEMENT:  UPDATE pgbench_accounts SET abalance = abalance + -2716 WHERE aid = 345657;
+2023-02-19 13:49:20.232 +08 [32594] ERROR:  no unpinned buffers available
+2023-02-19 13:49:20.232 +08 [32594] STATEMENT:  UPDATE pgbench_accounts SET abalance = abalance + -1878 WHERE aid = 205864;
+2023-02-19 13:49:20.298 +08 [32593] ERROR:  no unpinned buffers available
+2023-02-19 13:49:20.298 +08 [32593] STATEMENT:  UPDATE pgbench_accounts SET abalance = abalance + 1511 WHERE aid = 206022;
+2023-02-19 13:49:21.104 +08 [32589] ERROR:  no unpinned buffers available
+2023-02-19 13:49:21.104 +08 [32589] STATEMENT:  UPDATE pgbench_branches SET bbalance = bbalance + 3044 WHERE bid = 2;
+2023-02-19 13:49:23.751 +08 [32596] ERROR:  no unpinned buffers available
+2023-02-19 13:49:23.751 +08 [32596] STATEMENT:  UPDATE pgbench_accounts SET abalance = abalance + 3175 WHERE aid = 397230;
+2023-02-19 13:49:27.965 +08 [32591] ERROR:  no unpinned buffers available
+2023-02-19 13:49:27.965 +08 [32591] STATEMENT:  UPDATE pgbench_accounts SET abalance = abalance + -1577 WHERE aid = 144045;
+2023-02-19 13:49:32.359 +08 [32590] ERROR:  no unpinned buffers available
+2023-02-19 13:49:32.359 +08 [32590] STATEMENT:  UPDATE pgbench_accounts SET abalance = abalance + -4110 WHERE aid = 277309;
+2023-02-19 13:49:32.794 +08 [32597] ERROR:  no unpinned buffers available
+2023-02-19 13:49:32.794 +08 [32597] STATEMENT:  UPDATE pgbench_accounts SET abalance = abalance + -66 WHERE aid = 354163;
+2023-02-19 13:49:46.155 +08 [32595] ERROR:  no unpinned buffers available
+2023-02-19 13:49:46.155 +08 [32595] STATEMENT:  UPDATE pgbench_accounts SET abalance = abalance + -1216 WHERE aid = 197937;
+2023-02-19 13:50:37.330 +08 [32598] ERROR:  no unpinned buffers available
+2023-02-19 13:50:37.330 +08 [32598] STATEMENT:  UPDATE pgbench_accounts SET abalance = abalance + 298 WHERE aid = 355257;
+2023-02-19 13:50:37.338 +08 [32621] ERROR:  no unpinned buffers available
+2023-02-19 13:50:37.338 +08 [32621] STATEMENT:  SELECT SUM(heap_blks_read) AS heap_read, SUM(heap_blks_hit)  AS heap_hit, SUM(heap_blks_hit) / (SUM(heap_blks_hit) + SUM(heap_blks_read))  AS hit_ratio FROM pg_statio_user_tables;
+2023-02-19 13:52:03.666 +08 [32554] LOG:  received fast shutdown request
+2023-02-19 13:52:03.667 +08 [32554] LOG:  aborting any active transactions
+2023-02-19 13:52:03.668 +08 [32554] LOG:  background worker "logical replication launcher" (PID 32560) exited with exit code 1
+2023-02-19 13:52:03.668 +08 [32555] LOG:  shutting down
+2023-02-19 13:52:03.669 +08 [32555] LOG:  checkpoint starting: shutdown immediate
+2023-02-19 13:52:03.768 +08 [32555] LOG:  checkpoint complete: wrote 7508 buffers (91.7%); 0 WAL file(s) added, 0 removed, 1 recycled; write=0.090 s, sync=0.005 s, total=0.100 s; sync files=42, longest=0.001 s, average=0.001 s; distance=11367 kB, estimate=11367 kB
+2023-02-19 13:52:03.784 +08 [32554] LOG:  database system is shut down
+2023-02-19 13:52:14.576 +08 [33735] LOG:  starting PostgreSQL 15.0 on x86_64-pc-linux-gnu, compiled by gcc (Ubuntu 11.3.0-1ubuntu1~22.04) 11.3.0, 64-bit
+2023-02-19 13:52:14.576 +08 [33735] LOG:  listening on IPv4 address "127.0.0.1", port 5024
+2023-02-19 13:52:14.578 +08 [33735] LOG:  listening on Unix socket "/tmp/.s.PGSQL.5024"
+2023-02-19 13:52:14.581 +08 [33738] LOG:  database system was shut down at 2023-02-19 13:52:03 +08
+2023-02-19 13:52:14.584 +08 [33735] LOG:  database system is ready to accept connections
+2023-02-19 13:52:25.666 +08 [33735] LOG:  received fast shutdown request
+2023-02-19 13:52:25.677 +08 [33735] LOG:  aborting any active transactions
+2023-02-19 13:52:25.678 +08 [33735] LOG:  background worker "logical replication launcher" (PID 33741) exited with exit code 1
+2023-02-19 13:52:25.678 +08 [33736] LOG:  shutting down
+2023-02-19 13:52:25.679 +08 [33736] LOG:  checkpoint starting: shutdown immediate
+2023-02-19 13:52:25.685 +08 [33736] LOG:  checkpoint complete: wrote 3 buffers (18.8%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.002 s, sync=0.001 s, total=0.007 s; sync files=3, longest=0.001 s, average=0.001 s; distance=3 kB, estimate=3 kB
+2023-02-19 13:52:25.687 +08 [33735] LOG:  database system is shut down
+2023-02-19 13:52:28.168 +08 [33797] LOG:  starting PostgreSQL 15.0 on x86_64-pc-linux-gnu, compiled by gcc (Ubuntu 11.3.0-1ubuntu1~22.04) 11.3.0, 64-bit
+2023-02-19 13:52:28.169 +08 [33797] LOG:  listening on IPv4 address "127.0.0.1", port 5024
+2023-02-19 13:52:28.170 +08 [33797] LOG:  listening on Unix socket "/tmp/.s.PGSQL.5024"
+2023-02-19 13:52:28.173 +08 [33800] LOG:  database system was shut down at 2023-02-19 13:52:25 +08
+2023-02-19 13:52:28.176 +08 [33797] LOG:  database system is ready to accept connections
+2023-02-19 13:55:04.155 +08 [33832] ERROR:  no unpinned buffers available
+2023-02-19 13:55:04.155 +08 [33832] STATEMENT:  INSERT INTO pgbench_history (tid, bid, aid, delta, mtime) VALUES (2, 2, 224159, -282, CURRENT_TIMESTAMP);
+2023-02-19 13:55:08.407 +08 [33833] ERROR:  no unpinned buffers available
+2023-02-19 13:55:08.407 +08 [33833] STATEMENT:  UPDATE pgbench_accounts SET abalance = abalance + -912 WHERE aid = 77717;
+2023-02-19 13:55:58.532 +08 [33839] ERROR:  no unpinned buffers available at character 22
+2023-02-19 13:55:58.532 +08 [33839] STATEMENT:  SELECT abalance FROM pgbench_accounts WHERE aid = 293986;
+2023-02-19 13:56:02.378 +08 [33834] ERROR:  no unpinned buffers available
+2023-02-19 13:56:02.378 +08 [33834] STATEMENT:  UPDATE pgbench_accounts SET abalance = abalance + -1071 WHERE aid = 36230;
+2023-02-19 13:57:28.344 +08 [33798] LOG:  checkpoint starting: time
+2023-02-19 13:57:28.370 +08 [33798] LOG:  checkpoint complete: wrote 49 buffers (0.6%); 0 WAL file(s) added, 0 removed, 4 recycled; write=0.003 s, sync=0.014 s, total=0.026 s; sync files=43, longest=0.006 s, average=0.001 s; distance=67642 kB, estimate=67642 kB
+2023-02-19 13:58:15.208 +08 [33836] LOG:  unexpected EOF on client connection with an open transaction
+2023-02-19 13:58:15.208 +08 [33835] LOG:  could not receive data from client: Connection reset by peer
+2023-02-19 13:58:15.208 +08 [33840] LOG:  could not receive data from client: Connection reset by peer
+2023-02-19 13:58:15.208 +08 [33838] LOG:  could not receive data from client: Connection reset by peer
+2023-02-19 13:58:15.208 +08 [33837] LOG:  could not receive data from client: Connection reset by peer
+2023-02-19 13:58:15.208 +08 [33835] LOG:  unexpected EOF on client connection with an open transaction
+2023-02-19 13:58:15.208 +08 [33840] LOG:  unexpected EOF on client connection with an open transaction
+2023-02-19 13:58:15.208 +08 [33838] LOG:  unexpected EOF on client connection with an open transaction
+2023-02-19 13:58:15.208 +08 [33837] LOG:  unexpected EOF on client connection with an open transaction
+2023-02-19 13:58:15.208 +08 [33831] LOG:  could not send data to client: Broken pipe
+2023-02-19 13:58:15.208 +08 [33831] FATAL:  connection to client lost
+2023-02-19 13:58:19.066 +08 [33797] LOG:  received fast shutdown request
+2023-02-19 13:58:19.077 +08 [33797] LOG:  aborting any active transactions
+2023-02-19 13:58:19.078 +08 [33797] LOG:  background worker "logical replication launcher" (PID 33803) exited with exit code 1
+2023-02-19 13:58:19.079 +08 [33798] LOG:  shutting down
+2023-02-19 13:58:19.079 +08 [33798] LOG:  checkpoint starting: shutdown immediate
+2023-02-19 13:58:19.173 +08 [33798] LOG:  checkpoint complete: wrote 8214 buffers (100.3%); 0 WAL file(s) added, 0 removed, 1 recycled; write=0.082 s, sync=0.008 s, total=0.095 s; sync files=18, longest=0.002 s, average=0.001 s; distance=10772 kB, estimate=61955 kB
+2023-02-19 13:58:19.181 +08 [33797] LOG:  database system is shut down
+2023-02-19 13:58:31.674 +08 [35205] LOG:  starting PostgreSQL 15.0 on x86_64-pc-linux-gnu, compiled by gcc (Ubuntu 11.3.0-1ubuntu1~22.04) 11.3.0, 64-bit
+2023-02-19 13:58:31.674 +08 [35205] LOG:  listening on IPv4 address "127.0.0.1", port 5024
+2023-02-19 13:58:31.675 +08 [35205] LOG:  listening on Unix socket "/tmp/.s.PGSQL.5024"
+2023-02-19 13:58:31.678 +08 [35208] LOG:  database system was shut down at 2023-02-19 13:58:19 +08
+2023-02-19 13:58:31.681 +08 [35205] LOG:  database system is ready to accept connections
+2023-02-19 14:02:10.237 +08 [35246] ERROR:  no unpinned buffers available
+2023-02-19 14:02:10.237 +08 [35246] STATEMENT:  UPDATE pgbench_accounts SET abalance = abalance + -1776 WHERE aid = 66551;
+2023-02-19 14:03:02.057 +08 [35248] ERROR:  no unpinned buffers available
+2023-02-19 14:03:02.057 +08 [35248] STATEMENT:  UPDATE pgbench_accounts SET abalance = abalance + -3173 WHERE aid = 40321;
+2023-02-19 14:03:31.992 +08 [35206] LOG:  checkpoint starting: time
+2023-02-19 14:03:32.037 +08 [35206] LOG:  checkpoint complete: wrote 49 buffers (0.6%); 0 WAL file(s) added, 0 removed, 4 recycled; write=0.003 s, sync=0.032 s, total=0.046 s; sync files=43, longest=0.014 s, average=0.001 s; distance=69065 kB, estimate=69065 kB
+2023-02-19 14:04:09.039 +08 [35240] ERROR:  no unpinned buffers available
+2023-02-19 14:04:09.039 +08 [35240] STATEMENT:  UPDATE pgbench_accounts SET abalance = abalance + 1931 WHERE aid = 105095;
