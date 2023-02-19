@@ -132,23 +132,29 @@ void DeleteBuffer(int buf_id);
 // case 2
 void AddNewBuffer(int buf_id) 
 {
+	// Declaring at top of function for ISO C90
+	BufferPage *oldStackTop;
+	BufferPage *newStackTop;
+
 	// Check if front of buffer is null (empty list)
 	if (StrategyControl->lruStackTop == POINT_TO_NULL) {
+		// Declaring at top of function for ISO C90
+		BufferPage *bp;
 		// Can just add buf_id as top and bottom (because it is the only buffer in Lru stack)
 		StrategyControl->lruStackTop = buf_id;
 		StrategyControl->lruStackBottom = buf_id;
-		BufferPage *bp = &LruStack[buf_id];
+		bp = &LruStack[buf_id];
 		bp->next = END_OF_STACK;
 		return;
 	}
 
 	// Else, add new buffer
 	// Get pointer to old stack top
-	BufferPage *oldStackTop = &LruStack[StrategyControl->lruStackTop];
+	oldStackTop = &LruStack[StrategyControl->lruStackTop];
 	// Change stack top to new buf_id
 	StrategyControl->lruStackTop = buf_id;
 	// Change next pointer of new stack top
-	BufferPage *newStackTop = &LruStack[buf_id];
+	newStackTop = &LruStack[buf_id];
 	newStackTop->next = oldStackTop->buffer_id;
 	// Change prev pointer of old stack top
 	oldStackTop->prev = newStackTop->buffer_id;
@@ -158,6 +164,12 @@ void AddNewBuffer(int buf_id)
 // Same implementation for 2 cases, will differentiate via method of obtaining buf_id
 void MoveBufferToHead(int buf_id)
 {
+	// Declaring at the top for ISO C90
+	BufferPage *movedPage; 
+	BufferPage *movedPagePrev;
+	BufferPage *movedPageNext;
+	BufferPage *oldTop;
+
 	// 1. If buffer is at lru stack top, do nothing
 	if (StrategyControl->lruStackTop == buf_id) 
 		return;
@@ -185,10 +197,10 @@ void MoveBufferToHead(int buf_id)
 	}
 
 	// 3. Else, buffer is in the middle
-	BufferPage *movedPage = &LruStack[buf_id];
-	BufferPage *movedPagePrev = &LruStack[movedPage->prev];
-	BufferPage *movedPageNext = &LruStack[movedPage->next];
-	BufferPage *oldTop = &LruStack[StrategyControl->lruStackTop];
+	movedPage = &LruStack[buf_id];
+	movedPagePrev = &LruStack[movedPage->prev];
+	movedPageNext = &LruStack[movedPage->next];
+	oldTop = &LruStack[StrategyControl->lruStackTop];
 
 	movedPagePrev->next = movedPageNext->buffer_id;
 	movedPageNext->prev = movedPagePrev->buffer_id;	
@@ -335,11 +347,12 @@ StrategyUpdateAccessedBuffer(int buf_id, bool delete)
 	}
 	else 
 	{
-		SpinLockAcquire(&StrategyControl->buffer_strategy_lock);
-		// If buffer is not in list, add it (Case 2)
 		BufferPage *bp = &LruStack[buf_id];
-		bool isBufferInStack = (bp->next == POINT_TO_NULL && bp->prev == POINT_TO_NULL);
-		if (isBufferInStack) 
+		// If buffer is not in list, add it (Case 2)
+		bool isBufferNotInStack;
+		SpinLockAcquire(&StrategyControl->buffer_strategy_lock);
+		isBufferNotInStack = (bp->next == POINT_TO_NULL && bp->prev == POINT_TO_NULL);
+		if (isBufferNotInStack) 
 		{
 			AddNewBuffer(buf_id);
 		}
@@ -373,7 +386,8 @@ StrategyGetBuffer(BufferAccessStrategy strategy, uint32 *buf_state)
 {
 	BufferDesc *buf;
 	int			bgwprocno;
-	int			trycounter;
+	// int			trycounter; /* Not used */
+	int iteratedBuffer;
 	uint32		local_buf_state;	/* to avoid repeated (de-)referencing */
 
 	/*
@@ -486,9 +500,10 @@ StrategyGetBuffer(BufferAccessStrategy strategy, uint32 *buf_state)
 
 	/* Nothing on the freelist, so run the "LRU" algorithm */
 	// Start with LRU stack bottom
-	int iteratedBuffer = StrategyControl->lruStackBottom;
+	iteratedBuffer = StrategyControl->lruStackBottom;
 	for (;;)
 	{
+		BufferPage *iteratedBP;
 		buf = GetBufferDescriptor(iteratedBuffer);
 
 		/*
@@ -522,7 +537,7 @@ StrategyGetBuffer(BufferAccessStrategy strategy, uint32 *buf_state)
 			return NULL;
 		}
 		UnlockBufHdr(buf, local_buf_state);
-		BufferPage *iteratedBP = &LruStack[iteratedBuffer];
+		iteratedBP = &LruStack[iteratedBuffer];
 		// Iterate next buffer page
 		iteratedBuffer = iteratedBP->prev;
 	}
@@ -652,6 +667,8 @@ void
 StrategyInitialize(bool init)
 {
 	bool		found;
+	// Need to create LRU Stack buffer pool 
+	bool lruStackFound;
 
 	/*
 	 * Initialize the shared buffer lookup hashtable.
@@ -706,9 +723,6 @@ StrategyInitialize(bool init)
 	}
 	else
 		Assert(!init);
-
-	// Need to create LRU Stack buffer pool 
-	bool lruStackFound;
 
 	// Get or create the shared LRU Stack
 	LruStack = (BufferPage *) ShmemInitStruct("LRU Stack Status", MAXALIGN(NBuffers * sizeof(BufferPage)), &lruStackFound); 
