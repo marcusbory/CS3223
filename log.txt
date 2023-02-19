@@ -1,0 +1,571 @@
+2023-02-17 00:30:24.533 +08 [22354] LOG:  starting PostgreSQL 15.0 on x86_64-pc-linux-gnu, compiled by gcc (Ubuntu 11.3.0-1ubuntu1~22.04) 11.3.0, 64-bit
+2023-02-17 00:30:24.533 +08 [22354] LOG:  listening on IPv4 address "127.0.0.1", port 5024
+2023-02-17 00:30:24.535 +08 [22354] LOG:  listening on Unix socket "/tmp/.s.PGSQL.5024"
+2023-02-17 00:30:24.540 +08 [22357] LOG:  database system was interrupted; last known up at 2023-02-14 20:12:42 +08
+2023-02-17 00:30:24.639 +08 [22357] LOG:  database system was not properly shut down; automatic recovery in progress
+2023-02-17 00:30:24.643 +08 [22357] LOG:  redo starts at 0/BB40E60
+2023-02-17 00:30:24.643 +08 [22357] LOG:  invalid record length at 0/BB40F48: wanted 24, got 0
+2023-02-17 00:30:24.643 +08 [22357] LOG:  redo done at 0/BB40F10 system usage: CPU: user: 0.00 s, system: 0.00 s, elapsed: 0.00 s
+2023-02-17 00:30:24.647 +08 [22355] LOG:  checkpoint starting: end-of-recovery immediate wait
+2023-02-17 00:30:24.652 +08 [22355] LOG:  checkpoint complete: wrote 3 buffers (18.8%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.002 s, sync=0.001 s, total=0.006 s; sync files=2, longest=0.001 s, average=0.001 s; distance=0 kB, estimate=0 kB
+2023-02-17 00:30:24.654 +08 [22354] LOG:  database system is ready to accept connections
+2023-02-17 00:30:24.655 +08 [22359] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:30:25.656 +08 [22359] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:30:26.656 +08 [22359] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:30:27.657 +08 [22359] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:30:28.658 +08 [22359] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:30:29.659 +08 [22359] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:30:30.660 +08 [22359] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:30:31.660 +08 [22359] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:30:32.662 +08 [22359] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:30:33.663 +08 [22359] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:30:34.664 +08 [22359] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:30:35.665 +08 [22359] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:30:36.667 +08 [22359] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:30:37.668 +08 [22359] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:30:38.668 +08 [22359] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:30:39.669 +08 [22359] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:30:40.670 +08 [22359] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:30:41.671 +08 [22359] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:30:42.673 +08 [22359] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:30:43.674 +08 [22359] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:30:44.675 +08 [22359] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:30:45.676 +08 [22359] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:30:46.677 +08 [22359] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:30:47.679 +08 [22359] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:30:48.680 +08 [22359] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:30:49.682 +08 [22359] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:30:50.683 +08 [22359] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:30:51.684 +08 [22359] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:30:52.686 +08 [22359] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:30:53.687 +08 [22359] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:30:54.688 +08 [22359] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:30:55.689 +08 [22359] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:30:56.691 +08 [22359] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:30:57.692 +08 [22359] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:30:58.693 +08 [22359] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:30:59.695 +08 [22359] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:31:00.696 +08 [22359] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:31:01.698 +08 [22359] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:31:02.699 +08 [22359] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:31:03.700 +08 [22359] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:31:04.700 +08 [22359] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:31:05.702 +08 [22359] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:31:06.703 +08 [22359] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:31:07.704 +08 [22359] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:31:08.705 +08 [22359] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:31:09.707 +08 [22359] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:31:10.708 +08 [22359] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:31:11.709 +08 [22359] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:31:12.710 +08 [22359] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:31:13.711 +08 [22359] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:31:14.712 +08 [22359] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:31:15.713 +08 [22359] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:31:16.715 +08 [22359] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:31:17.716 +08 [22359] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:31:18.716 +08 [22359] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:31:19.718 +08 [22359] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:31:20.719 +08 [22359] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:31:21.720 +08 [22359] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:31:22.721 +08 [22359] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:31:23.723 +08 [22359] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:31:24.724 +08 [22359] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:31:25.726 +08 [22359] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:31:26.727 +08 [22359] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:31:27.728 +08 [22359] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:31:28.730 +08 [22359] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:31:29.731 +08 [22359] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:31:30.732 +08 [22359] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:31:31.733 +08 [22359] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:31:32.048 +08 [22427] FATAL:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:31:32.051 +08 [22429] FATAL:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:31:32.052 +08 [22430] FATAL:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:31:32.055 +08 [22433] FATAL:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:31:32.735 +08 [22359] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:31:33.736 +08 [22359] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:31:34.737 +08 [22359] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:31:35.739 +08 [22359] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:31:36.740 +08 [22359] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:31:37.741 +08 [22359] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:31:38.742 +08 [22359] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:31:39.744 +08 [22359] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:31:40.745 +08 [22359] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:31:41.746 +08 [22359] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:31:42.748 +08 [22359] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:31:43.749 +08 [22359] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:31:44.750 +08 [22359] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:31:45.752 +08 [22359] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:31:46.753 +08 [22359] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:31:47.754 +08 [22359] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:31:47.938 +08 [22354] LOG:  received fast shutdown request
+2023-02-17 00:31:47.950 +08 [22354] LOG:  aborting any active transactions
+2023-02-17 00:31:47.950 +08 [22359] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:31:47.950 +08 [22354] LOG:  background worker "logical replication launcher" (PID 22360) exited with exit code 1
+2023-02-17 00:31:47.950 +08 [22355] LOG:  shutting down
+2023-02-17 00:31:47.951 +08 [22355] LOG:  checkpoint starting: shutdown immediate
+2023-02-17 00:31:47.954 +08 [22355] LOG:  checkpoint complete: wrote 0 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.001 s, sync=0.001 s, total=0.004 s; sync files=0, longest=0.000 s, average=0.000 s; distance=0 kB, estimate=0 kB
+2023-02-17 00:31:47.956 +08 [22354] LOG:  database system is shut down
+2023-02-17 00:31:50.455 +08 [22438] LOG:  starting PostgreSQL 15.0 on x86_64-pc-linux-gnu, compiled by gcc (Ubuntu 11.3.0-1ubuntu1~22.04) 11.3.0, 64-bit
+2023-02-17 00:31:50.455 +08 [22438] LOG:  listening on IPv4 address "127.0.0.1", port 5024
+2023-02-17 00:31:50.457 +08 [22438] LOG:  listening on Unix socket "/tmp/.s.PGSQL.5024"
+2023-02-17 00:31:50.461 +08 [22441] LOG:  database system was shut down at 2023-02-17 00:31:47 +08
+2023-02-17 00:31:50.464 +08 [22438] LOG:  database system is ready to accept connections
+2023-02-17 00:31:50.465 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:31:51.466 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:31:52.468 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:31:53.469 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:31:54.470 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:31:55.417 +08 [22451] FATAL:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:31:55.420 +08 [22453] FATAL:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:31:55.422 +08 [22454] FATAL:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:31:55.425 +08 [22457] FATAL:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:31:55.470 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:31:56.472 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:31:57.473 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:31:58.474 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:31:59.475 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:32:00.476 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:32:01.476 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:32:02.478 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:32:03.479 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:32:04.480 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:32:05.481 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:32:06.483 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:32:07.484 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:32:08.485 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:32:09.486 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:32:10.488 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:32:11.489 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:32:12.490 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:32:13.491 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:32:14.493 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:32:15.494 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:32:16.496 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:32:17.497 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:32:18.498 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:32:19.500 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:32:20.501 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:32:21.502 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:32:22.503 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:32:23.504 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:32:24.505 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:32:25.507 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:32:26.508 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:32:27.509 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:32:28.511 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:32:29.512 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:32:30.514 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:32:31.515 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:32:32.516 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:32:33.518 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:32:34.519 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:32:35.520 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:32:36.522 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:32:37.523 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:32:38.524 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:32:39.525 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:32:40.527 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:32:41.528 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:32:42.528 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:32:43.530 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:32:44.531 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:32:45.532 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:32:46.533 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:32:47.534 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:32:48.536 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:32:49.536 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:32:50.537 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:32:51.538 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:32:52.540 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:32:53.541 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:32:54.543 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:32:55.544 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:32:56.545 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:32:57.547 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:32:58.548 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:32:59.549 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:33:00.551 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:33:01.552 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:33:02.553 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:33:03.554 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:33:04.556 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:33:05.556 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:33:06.557 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:33:07.559 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:33:08.560 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:33:09.562 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:33:10.563 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:33:11.564 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:33:12.565 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:33:13.566 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:33:14.567 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:33:15.569 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:33:16.570 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:33:17.571 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:33:18.573 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:33:19.574 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:33:20.575 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:33:21.576 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:33:22.577 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:33:23.579 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:33:24.580 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:33:25.581 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:33:26.583 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:33:27.584 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:33:28.585 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:33:29.587 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:33:30.588 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:33:31.589 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:33:32.590 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:33:33.591 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:33:34.592 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:33:35.593 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:33:36.594 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:33:37.596 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:33:38.596 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:33:39.597 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:33:40.599 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:33:41.600 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:33:42.600 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:33:43.601 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:33:44.603 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:33:45.604 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:33:46.605 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:33:47.607 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:33:48.608 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:33:49.609 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:33:50.610 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:33:51.612 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:33:52.612 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:33:53.613 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:33:54.615 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:33:55.616 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:33:56.616 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:33:57.617 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:33:58.619 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:33:59.620 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:34:00.621 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:34:01.622 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:34:02.624 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:34:03.624 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:34:04.626 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:34:05.627 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:34:06.628 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:34:07.629 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:34:08.630 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:34:09.632 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:34:10.633 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:34:11.634 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:34:12.636 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:34:13.637 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:34:14.639 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:34:15.640 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:34:16.641 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:34:17.643 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:34:18.644 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:34:19.645 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:34:20.646 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:34:21.648 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:34:22.648 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:34:23.650 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:34:24.651 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:34:25.652 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:34:26.653 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:34:27.654 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:34:28.656 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:34:29.656 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:34:30.657 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:34:31.659 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:34:32.660 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:34:33.661 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:34:34.662 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:34:35.663 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:34:36.664 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:34:37.665 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:34:38.667 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:34:39.668 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:34:40.669 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:34:41.671 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:34:42.672 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:34:43.673 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:34:44.675 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:34:45.676 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:34:46.677 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:34:47.679 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:34:48.680 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:34:49.681 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:34:50.683 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:34:51.707 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:34:52.709 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:34:53.710 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:34:54.711 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:34:55.713 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:34:56.714 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:34:57.715 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:34:58.717 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:34:59.718 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:35:00.720 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:35:01.721 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:35:02.723 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:35:03.724 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:35:04.725 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:35:05.727 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:35:06.728 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:35:07.728 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:35:08.730 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:35:09.731 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:35:10.733 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:35:11.734 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:35:12.735 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:35:13.736 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:35:14.737 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:35:15.739 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:35:16.740 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:35:17.742 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:35:18.743 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:35:19.744 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:35:20.746 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:35:21.747 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:35:22.748 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:35:23.749 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:35:24.751 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:35:25.752 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:35:26.754 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:35:27.755 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:35:28.756 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:35:29.758 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:35:30.759 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:35:31.760 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:35:32.761 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:35:33.763 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:35:34.763 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:35:35.764 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:35:36.765 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:35:37.767 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:35:38.768 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:35:39.769 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:35:40.771 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:35:41.772 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:35:42.773 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:35:43.774 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:35:44.776 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:35:45.776 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:35:46.778 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:35:47.779 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:35:48.780 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:35:49.781 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:35:50.782 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:35:51.784 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:35:52.784 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:35:53.785 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:35:54.787 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:35:55.788 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:35:56.788 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:35:57.788 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:35:58.789 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:35:59.791 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:36:00.792 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:36:01.793 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:36:02.795 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:36:03.796 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:36:04.796 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:36:05.797 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:36:06.799 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:36:07.800 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:36:08.801 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:36:09.802 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:36:10.803 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:36:11.804 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:36:12.804 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:36:13.806 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:36:14.807 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:36:15.808 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:36:16.809 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:36:17.810 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:36:18.812 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:36:19.812 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:36:20.813 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:36:21.814 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:36:22.815 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:36:23.816 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:36:24.816 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:36:25.818 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:36:26.819 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:36:27.820 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:36:28.821 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:36:29.822 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:36:30.824 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:36:31.824 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:36:32.825 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:36:33.826 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:36:34.828 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:36:35.828 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:36:36.829 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:36:37.830 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:36:38.831 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:36:39.832 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:36:40.832 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:36:41.833 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:36:42.834 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:36:43.835 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:36:44.837 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:36:45.838 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:36:46.839 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:36:47.840 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:36:48.841 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:36:49.842 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:36:50.489 +08 [22439] LOG:  checkpoint starting: time
+2023-02-17 00:36:50.506 +08 [22439] LOG:  checkpoint complete: wrote 3 buffers (18.8%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.002 s, sync=0.001 s, total=0.017 s; sync files=2, longest=0.001 s, average=0.001 s; distance=0 kB, estimate=0 kB
+2023-02-17 00:36:50.843 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:36:51.845 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:36:52.846 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:36:53.847 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:36:54.848 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:36:55.849 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:36:56.851 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:36:57.852 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:36:58.853 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:36:59.855 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:37:00.856 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:37:01.857 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:37:02.858 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:37:03.860 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:37:04.860 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:37:05.862 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:37:06.863 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:37:07.863 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:37:08.864 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:37:09.865 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:37:10.866 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:37:11.867 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:37:12.869 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:37:13.870 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:37:14.871 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:37:15.872 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:37:16.873 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:37:17.875 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:37:18.876 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:37:19.877 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:37:20.878 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:37:21.880 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:37:22.881 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:37:23.882 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:37:24.884 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:37:25.885 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:37:26.886 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:37:27.887 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:37:28.888 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:37:29.889 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:37:30.891 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:37:31.892 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:37:32.893 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:37:33.895 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:37:34.896 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:37:35.896 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:37:36.897 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:37:37.899 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:37:38.900 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:37:39.900 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:37:40.901 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:37:41.902 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:37:42.903 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:37:43.904 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:37:44.906 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:37:45.907 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:37:46.908 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:37:47.908 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:37:48.909 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:37:49.911 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:37:50.912 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:37:51.912 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:37:52.912 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:37:53.914 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:37:54.915 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:37:55.916 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:37:56.917 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:37:57.918 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:37:58.920 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:37:59.921 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:38:00.922 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:38:01.923 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:38:02.924 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:38:03.924 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:38:04.925 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:38:05.927 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:38:06.928 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:38:07.929 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:38:08.930 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:38:09.931 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:38:10.933 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:38:11.934 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:38:12.935 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:38:13.936 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:38:14.938 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:38:15.939 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-17 00:38:16.940 +08 [22443] ERROR:  StrategyUpdateAccessedBuffer: Not implemented!
+2023-02-18 14:55:03.213 +08 [9996] LOG:  starting PostgreSQL 15.0 on x86_64-pc-linux-gnu, compiled by gcc (Ubuntu 11.3.0-1ubuntu1~22.04) 11.3.0, 64-bit
+2023-02-18 14:55:03.214 +08 [9996] LOG:  listening on IPv4 address "127.0.0.1", port 5024
+2023-02-18 14:55:03.216 +08 [9996] LOG:  listening on Unix socket "/tmp/.s.PGSQL.5024"
+2023-02-18 14:55:03.220 +08 [9999] LOG:  database system was interrupted; last known up at 2023-02-17 00:36:50 +08
+2023-02-18 14:55:03.335 +08 [9999] LOG:  database system was not properly shut down; automatic recovery in progress
+2023-02-18 14:55:03.337 +08 [9999] LOG:  redo starts at 0/BB410A8
+2023-02-18 14:55:03.337 +08 [9999] LOG:  invalid record length at 0/BB41190: wanted 24, got 0
+2023-02-18 14:55:03.337 +08 [9999] LOG:  redo done at 0/BB41158 system usage: CPU: user: 0.00 s, system: 0.00 s, elapsed: 0.00 s
+2023-02-18 14:55:03.342 +08 [9997] LOG:  checkpoint starting: end-of-recovery immediate wait
+2023-02-18 14:55:03.348 +08 [9997] LOG:  checkpoint complete: wrote 3 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.002 s, sync=0.001 s, total=0.007 s; sync files=2, longest=0.001 s, average=0.001 s; distance=0 kB, estimate=0 kB
+2023-02-18 14:55:03.350 +08 [9996] LOG:  database system is ready to accept connections
+2023-02-18 14:55:05.331 +08 [9996] LOG:  received fast shutdown request
+2023-02-18 14:55:05.343 +08 [9996] LOG:  aborting any active transactions
+2023-02-18 14:55:05.344 +08 [9996] LOG:  background worker "logical replication launcher" (PID 10002) exited with exit code 1
+2023-02-18 14:55:05.344 +08 [9997] LOG:  shutting down
+2023-02-18 14:55:05.345 +08 [9997] LOG:  checkpoint starting: shutdown immediate
+2023-02-18 14:55:05.349 +08 [9997] LOG:  checkpoint complete: wrote 0 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.001 s, sync=0.001 s, total=0.005 s; sync files=0, longest=0.000 s, average=0.000 s; distance=0 kB, estimate=0 kB
+2023-02-18 14:55:05.352 +08 [9996] LOG:  database system is shut down
+2023-02-18 14:55:07.350 +08 [10019] LOG:  starting PostgreSQL 15.0 on x86_64-pc-linux-gnu, compiled by gcc (Ubuntu 11.3.0-1ubuntu1~22.04) 11.3.0, 64-bit
+2023-02-18 14:55:07.351 +08 [10019] LOG:  listening on IPv4 address "127.0.0.1", port 5024
+2023-02-18 14:55:07.353 +08 [10019] LOG:  listening on Unix socket "/tmp/.s.PGSQL.5024"
+2023-02-18 14:55:07.356 +08 [10022] LOG:  database system was shut down at 2023-02-18 14:55:05 +08
+2023-02-18 14:55:07.359 +08 [10019] LOG:  database system is ready to accept connections
+2023-02-18 15:00:07.418 +08 [10020] LOG:  checkpoint starting: time
+2023-02-18 15:00:07.442 +08 [10020] LOG:  checkpoint complete: wrote 49 buffers (0.6%); 0 WAL file(s) added, 0 removed, 4 recycled; write=0.004 s, sync=0.011 s, total=0.025 s; sync files=42, longest=0.003 s, average=0.001 s; distance=67709 kB, estimate=67709 kB
+2023-02-18 15:05:07.836 +08 [10020] LOG:  checkpoint starting: time
+2023-02-18 15:05:08.170 +08 [10020] LOG:  checkpoint complete: wrote 48 buffers (0.6%); 0 WAL file(s) added, 0 removed, 1 recycled; write=0.304 s, sync=0.015 s, total=0.334 s; sync files=15, longest=0.013 s, average=0.001 s; distance=14908 kB, estimate=62429 kB
+2023-02-19 12:59:42.193 +08 [21704] LOG:  starting PostgreSQL 15.0 on x86_64-pc-linux-gnu, compiled by gcc (Ubuntu 11.3.0-1ubuntu1~22.04) 11.3.0, 64-bit
+2023-02-19 12:59:42.194 +08 [21704] LOG:  listening on IPv4 address "127.0.0.1", port 5024
+2023-02-19 12:59:42.196 +08 [21704] LOG:  listening on Unix socket "/tmp/.s.PGSQL.5024"
+2023-02-19 12:59:42.201 +08 [21707] LOG:  database system was interrupted; last known up at 2023-02-18 15:05:08 +08
+2023-02-19 12:59:42.303 +08 [21707] LOG:  database system was not properly shut down; automatic recovery in progress
+2023-02-19 12:59:42.306 +08 [21707] LOG:  redo starts at 0/10BEF970
+2023-02-19 12:59:42.306 +08 [21707] LOG:  invalid record length at 0/10BEFA58: wanted 24, got 0
+2023-02-19 12:59:42.306 +08 [21707] LOG:  redo done at 0/10BEFA20 system usage: CPU: user: 0.00 s, system: 0.00 s, elapsed: 0.00 s
+2023-02-19 12:59:42.311 +08 [21705] LOG:  checkpoint starting: end-of-recovery immediate wait
+2023-02-19 12:59:42.317 +08 [21705] LOG:  checkpoint complete: wrote 3 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.002 s, sync=0.001 s, total=0.007 s; sync files=2, longest=0.001 s, average=0.001 s; distance=0 kB, estimate=0 kB
+2023-02-19 12:59:42.319 +08 [21704] LOG:  database system is ready to accept connections
+2023-02-19 12:59:44.348 +08 [21704] LOG:  received fast shutdown request
+2023-02-19 12:59:44.359 +08 [21704] LOG:  aborting any active transactions
+2023-02-19 12:59:44.360 +08 [21704] LOG:  background worker "logical replication launcher" (PID 21710) exited with exit code 1
+2023-02-19 12:59:44.360 +08 [21705] LOG:  shutting down
+2023-02-19 12:59:44.361 +08 [21705] LOG:  checkpoint starting: shutdown immediate
+2023-02-19 12:59:44.365 +08 [21705] LOG:  checkpoint complete: wrote 0 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.001 s, sync=0.001 s, total=0.005 s; sync files=0, longest=0.000 s, average=0.000 s; distance=0 kB, estimate=0 kB
+2023-02-19 12:59:44.366 +08 [21704] LOG:  database system is shut down
+2023-02-19 12:59:46.298 +08 [21724] LOG:  starting PostgreSQL 15.0 on x86_64-pc-linux-gnu, compiled by gcc (Ubuntu 11.3.0-1ubuntu1~22.04) 11.3.0, 64-bit
+2023-02-19 12:59:46.298 +08 [21724] LOG:  listening on IPv4 address "127.0.0.1", port 5024
+2023-02-19 12:59:46.300 +08 [21724] LOG:  listening on Unix socket "/tmp/.s.PGSQL.5024"
+2023-02-19 12:59:46.303 +08 [21727] LOG:  database system was shut down at 2023-02-19 12:59:44 +08
+2023-02-19 12:59:46.305 +08 [21724] LOG:  database system is ready to accept connections
+2023-02-19 12:59:49.098 +08 [21742] ERROR:  relation "movies" does not exist at character 22
+2023-02-19 12:59:49.098 +08 [21742] STATEMENT:  SELECT COUNT(*) FROM movies;
+2023-02-19 13:04:47.000 +08 [21725] LOG:  checkpoint starting: time
+2023-02-19 13:04:47.049 +08 [21725] LOG:  checkpoint complete: wrote 3 buffers (18.8%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.002 s, sync=0.005 s, total=0.050 s; sync files=46, longest=0.001 s, average=0.001 s; distance=645 kB, estimate=645 kB
+2023-02-19 13:29:35.559 +08 [21724] LOG:  received fast shutdown request
+2023-02-19 13:29:35.571 +08 [21724] LOG:  aborting any active transactions
+2023-02-19 13:29:35.572 +08 [21724] LOG:  background worker "logical replication launcher" (PID 21730) exited with exit code 1
+2023-02-19 13:29:35.572 +08 [21725] LOG:  shutting down
+2023-02-19 13:29:35.573 +08 [21725] LOG:  checkpoint starting: shutdown immediate
+2023-02-19 13:29:35.576 +08 [21725] LOG:  checkpoint complete: wrote 0 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.001 s, sync=0.001 s, total=0.004 s; sync files=0, longest=0.000 s, average=0.000 s; distance=0 kB, estimate=580 kB
+2023-02-19 13:29:35.578 +08 [21724] LOG:  database system is shut down
+2023-02-19 13:29:37.476 +08 [27865] LOG:  starting PostgreSQL 15.0 on x86_64-pc-linux-gnu, compiled by gcc (Ubuntu 11.3.0-1ubuntu1~22.04) 11.3.0, 64-bit
+2023-02-19 13:29:37.476 +08 [27865] LOG:  listening on IPv4 address "127.0.0.1", port 5024
+2023-02-19 13:29:37.478 +08 [27865] LOG:  listening on Unix socket "/tmp/.s.PGSQL.5024"
+2023-02-19 13:29:37.480 +08 [27868] LOG:  database system was shut down at 2023-02-19 13:29:35 +08
+2023-02-19 13:29:37.483 +08 [27865] LOG:  database system is ready to accept connections

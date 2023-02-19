@@ -22,17 +22,26 @@
 
 #define INT_ACCESS_ONCE(var)	((int)(*((volatile int *)&(var))))
 
-// Doubly Linked List for maintaining LRU Stack
+// Use POINT_TO_NULL constant to denote null pointers when using ints as pseudo-pointers
+#define POINT_TO_NULL (-1)
+#define END_OF_STACK (-2)
+
+/**
+ * 1. Buffer pool (LRU Stack) is implemented as an array.
+ * 2. Index to each array is referred to as a buffer_id.
+*/
 typedef struct BufferPage {
 	// Store buffer id
-	int buf_id;
+	int buffer_id;
 
-	// Next and prev pointers (standard DLL)
-	BufferPage *next;
-	BufferPage *prev;
+	// Use ints as pseudo-pointers (no need actual pointer as implementation uses an array)
+	// Ints store next/prev buffer_id
+	int next;
+	int prev;
 } BufferPage;
-// Shared LRU Stack
-static BufferPage *lruStack = NULL; // Will init in shmem init
+
+// Pointer to a shared LRU Stack buffer pool
+static BufferPage* LruStack = NULL;
 
 /*
  * The shared freelist control information.
@@ -53,9 +62,9 @@ typedef struct
 	int			lastFreeBuffer; /* Tail of list of unused buffers */
 
 	// CS3223
-	// Pointers to top and bottom of LRU stack for easy access
-	BufferPage *lruStackTop;
-	BufferPage *lruStackBottom;
+	// Pseudo-pointers to top and bottom of LRU stack for easy access
+	int lruStackTop; // Most Recently Used
+	int lruStackBottom;	// Least Recently Used
 
 	/*
 	 * NOTE: lastFreeBuffer is undefined when firstFreeBuffer is -1 (that is,
@@ -115,6 +124,114 @@ typedef struct BufferAccessStrategyData
 
 /* cs3223 */
 void StrategyUpdateAccessedBuffer(int buf_id, bool delete);
+// Helper functions
+void AddNewBuffer(int buf_id);
+void MoveBufferToHead(int buf_id);
+void DeleteBuffer(int buf_id);
+
+// case 2
+void AddNewBuffer(int buf_id) 
+{
+	// Check if front of buffer is null (empty list)
+	if (StrategyControl->lruStackTop == POINT_TO_NULL) {
+		// Can just add buf_id as top and bottom (because it is the only buffer in Lru stack)
+		StrategyControl->lruStackTop = buf_id;
+		StrategyControl->lruStackBottom = buf_id;
+		BufferPage *bp = &LruStack[buf_id];
+		bp->next = END_OF_STACK;
+		return;
+	}
+
+	// Else, add new buffer
+	// Get pointer to old stack top
+	BufferPage *oldStackTop = &LruStack[StrategyControl->lruStackTop];
+	// Change stack top to new buf_id
+	StrategyControl->lruStackTop = buf_id;
+	// Change next pointer of new stack top
+	BufferPage *newStackTop = &LruStack[buf_id];
+	newStackTop->next = oldStackTop->buffer_id;
+	// Change prev pointer of old stack top
+	oldStackTop->prev = newStackTop->buffer_id;
+}
+
+// case 1 and 3 
+// Same implementation for 2 cases, will differentiate via method of obtaining buf_id
+void MoveBufferToHead(int buf_id)
+{
+	// 1. If buffer is at lru stack top, do nothing
+	if (StrategyControl->lruStackTop == buf_id) 
+		return;
+
+	// 2. If buffer is at lru stack bottom:
+	// - change bottom->prev's pointer to END_OF_STACK
+	// - change top's next pointer to bottom node
+	// - change lruStackBottom
+	// - change lruStacktop
+	if (StrategyControl->lruStackBottom == buf_id) {
+		// Get pointers to everything before switching
+		BufferPage *oldBottom = &LruStack[buf_id];
+		BufferPage *newBottom = &LruStack[oldBottom->prev];
+		BufferPage *oldTop = &LruStack[StrategyControl->lruStackTop];
+		// BufferPage *newTop = oldBottom;
+
+		newBottom->next = END_OF_STACK;
+		StrategyControl->lruStackBottom = newBottom->buffer_id;
+
+		oldTop->prev = oldBottom->buffer_id;
+		oldBottom->next = oldTop->buffer_id;
+		oldBottom->prev = POINT_TO_NULL;
+		StrategyControl->lruStackTop = oldBottom->buffer_id;
+		return;
+	}
+
+	// 3. Else, buffer is in the middle
+	BufferPage *movedPage = &LruStack[buf_id];
+	BufferPage *movedPagePrev = &LruStack[movedPage->prev];
+	BufferPage *movedPageNext = &LruStack[movedPage->next];
+	BufferPage *oldTop = &LruStack[StrategyControl->lruStackTop];
+
+	movedPagePrev->next = movedPageNext->buffer_id;
+	movedPageNext->prev = movedPagePrev->buffer_id;	
+
+	movedPage->next = oldTop->buffer_id;
+	movedPage->prev = POINT_TO_NULL;
+	oldTop->prev = movedPage->buffer_id;
+	StrategyControl->lruStackTop = movedPage->buffer_id;
+}
+
+// case 4
+void DeleteBuffer(int buf_id)
+{
+	BufferPage *deletedPage = &LruStack[buf_id];
+
+	// 1. If deleted buffer is at top
+	if (StrategyControl->lruStackTop == buf_id) 
+	{
+		BufferPage *deletedPageNext = &LruStack[deletedPage->next];
+		deletedPageNext->prev = POINT_TO_NULL;
+		StrategyControl->lruStackTop = deletedPageNext->buffer_id;
+	}
+
+	// 2. If deleted buffer is at bottom (and NOT the top)
+	else if (StrategyControl->lruStackBottom == buf_id)
+	{
+		BufferPage *deletedPagePrev = &LruStack[deletedPage->prev];
+		deletedPagePrev->next = END_OF_STACK;
+		StrategyControl->lruStackBottom = deletedPagePrev->buffer_id;
+	}
+
+	// 3. If deleted buffer is at middle
+	else 
+	{
+		BufferPage *deletedPagePrev = &LruStack[deletedPage->prev];
+		BufferPage *deletedPageNext = &LruStack[deletedPage->next];
+		deletedPagePrev->next = deletedPageNext->buffer_id;
+		deletedPageNext->prev = deletedPagePrev->buffer_id;
+	}
+
+	deletedPage->next = POINT_TO_NULL;
+	deletedPage->prev = POINT_TO_NULL;
+}
 
 /* Prototypes for internal functions */
 static BufferDesc *GetBufferFromRing(BufferAccessStrategy strategy,
@@ -212,11 +329,31 @@ have_free_buffer(void)
 void
 StrategyUpdateAccessedBuffer(int buf_id, bool delete)
 {
-	elog(ERROR, "StrategyUpdateAccessedBuffer: Not implemented!");
+	if (delete) 
+	{
+		DeleteBuffer(buf_id);
+	}
+	else 
+	{
+		// If buffer is not in list, add it (Case 2)
+		BufferPage *bp = &LruStack[buf_id];
+		bool isBufferInStack = (bp->next == POINT_TO_NULL && bp->prev == POINT_TO_NULL);
+		if (isBufferInStack) 
+		{
+			AddNewBuffer(buf_id);
+		}
+		// Else, Case 1 or 3
+		else 
+		{
+			MoveBufferToHead(buf_id);
+		}
+	}
+	// elog(ERROR, "StrategyUpdateAccessedBuffer: Not implemented!");
 }
 
 
 
+/* cs3223 - case 2 and 3 */
 /*
  * StrategyGetBuffer
  *
@@ -336,6 +473,8 @@ StrategyGetBuffer(BufferAccessStrategy strategy, uint32 *buf_state)
 			{
 				if (strategy != NULL)
 					AddBufferToRing(strategy, buf);
+				// Case 2
+				StrategyUpdateAccessedBuffer(buf->buf_id, false);
 				*buf_state = local_buf_state;
 				return buf;
 			}
@@ -343,11 +482,12 @@ StrategyGetBuffer(BufferAccessStrategy strategy, uint32 *buf_state)
 		}
 	}
 
-	/* Nothing on the freelist, so run the "clock sweep" algorithm */
-	trycounter = NBuffers;
+	/* Nothing on the freelist, so run the "LRU" algorithm */
+	// Start with LRU stack bottom
+	int iteratedBuffer = StrategyControl->lruStackBottom;
 	for (;;)
 	{
-		buf = GetBufferDescriptor(ClockSweepTick());
+		buf = GetBufferDescriptor(iteratedBuffer);
 
 		/*
 		 * If the buffer is pinned or has a nonzero usage_count, we cannot use
@@ -357,22 +497,16 @@ StrategyGetBuffer(BufferAccessStrategy strategy, uint32 *buf_state)
 
 		if (BUF_STATE_GET_REFCOUNT(local_buf_state) == 0)
 		{
-			if (BUF_STATE_GET_USAGECOUNT(local_buf_state) != 0)
-			{
-				local_buf_state -= BUF_USAGECOUNT_ONE;
-
-				trycounter = NBuffers;
-			}
-			else
-			{
-				/* Found a usable buffer */
-				if (strategy != NULL)
-					AddBufferToRing(strategy, buf);
-				*buf_state = local_buf_state;
-				return buf;
-			}
+			/* Found a usable buffer */
+			if (strategy != NULL)
+				AddBufferToRing(strategy, buf);
+			// Case 3
+			StrategyUpdateAccessedBuffer(buf->buf_id, false);
+			*buf_state = local_buf_state;
+			return buf;
 		}
-		else if (--trycounter == 0)
+		// Reached the top of LRU stack, no free buffer
+		if (StrategyControl->lruStackTop == iteratedBuffer)
 		{
 			/*
 			 * We've scanned all the buffers without making any state changes,
@@ -383,11 +517,16 @@ StrategyGetBuffer(BufferAccessStrategy strategy, uint32 *buf_state)
 			 */
 			UnlockBufHdr(buf, local_buf_state);
 			elog(ERROR, "no unpinned buffers available");
+			return NULL;
 		}
 		UnlockBufHdr(buf, local_buf_state);
+		BufferPage *iteratedBP = &LruStack[iteratedBuffer];
+		// Iterate next buffer page
+		iteratedBuffer = iteratedBP->prev;
 	}
 }
 
+/* cs3223 - case 4 */
 /*
  * StrategyFreeBuffer: put a buffer on the freelist
  */
@@ -406,6 +545,8 @@ StrategyFreeBuffer(BufferDesc *buf)
 		if (buf->freeNext < 0)
 			StrategyControl->lastFreeBuffer = buf->buf_id;
 		StrategyControl->firstFreeBuffer = buf->buf_id;
+		// Case 4
+		DeleteBuffer(buf->buf_id);
 	}
 
 	SpinLockRelease(&StrategyControl->buffer_strategy_lock);
@@ -492,6 +633,9 @@ StrategyShmemSize(void)
 	/* size of the shared replacement strategy control block */
 	size = add_size(size, MAXALIGN(sizeof(BufferStrategyControl)));
 
+	// Add size of Buffer Pool
+	size = add_size(size, MAXALIGN(NBuffers * sizeof(BufferPage)));
+
 	return size;
 }
 
@@ -552,9 +696,37 @@ StrategyInitialize(bool init)
 
 		/* No pending notification */
 		StrategyControl->bgwprocno = -1;
+
+		// Update Strategy Control's pseudo-pointers for top and bottom
+		// On initialise, they should point to null since nothing is in buffer list
+		StrategyControl->lruStackTop = POINT_TO_NULL;
+		StrategyControl->lruStackBottom = POINT_TO_NULL;
 	}
 	else
 		Assert(!init);
+
+	// Need to create LRU Stack buffer pool 
+	bool lruStackFound;
+
+	// Get or create the shared LRU Stack
+	LruStack = (BufferPage *) ShmemInitStruct("LRU Stack Status", MAXALIGN(NBuffers * sizeof(BufferPage)), &lruStackFound); 
+	if (!lruStackFound) 
+	{
+		Assert(init);
+		// Iniitalise all NBuffer pages in LRU stack to be empty 
+		// This means their pseudo-pointers point to null
+		for (int i = 0; i < NBuffers; ++i) 
+		{
+			BufferPage *bufferPage = &LruStack[i];
+			bufferPage->buffer_id = i;
+			bufferPage->next = POINT_TO_NULL;
+			bufferPage->prev = POINT_TO_NULL;
+		}
+	}
+	else 
+	{
+		Assert(!init);
+	}
 }
 
 
